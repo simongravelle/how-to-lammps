@@ -7,7 +7,7 @@ ends in order to extend it.
 Creating a box of water
 -----------------------
 
-![#FF0000](https://placehold.it/15/FF0000/000000?text=+)
+![#FF0a0f](https://placehold.it/15/FF0a0f/FF0a0f?text=+)
 
 ```diff
 - text in red
