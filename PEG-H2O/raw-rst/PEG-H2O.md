@@ -7,7 +7,7 @@ ends in order to extend it.
 Creating a box of water
 -----------------------
 
-<span style=“color:green;”> text goes here</span>
+![#FF0000](https://placehold.it/15/FF0000/000000?text=+)
 
 ```diff
 - text in red
