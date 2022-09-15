@@ -7,35 +7,13 @@ ends in order to extend it.
 Creating a box of water
 -----------------------
 
-.. role:: red
-    :class: red
-
-.. role:: blue
-    :class: blue
-
-.. role:: green
-    :class: green
-
-.. raw:: html
-
-    <style>
-
-    .red {
-        color:red;
-    }
-    .blue {
-        color:blue;
-    }
-    .green {
-        color:green;
-    }
-
-    </style>
-
-
-- This is :red:`Red` text.
-- This is :blue:`Blue` text.
-- This is :green:`Green` text.
+```diff
+- text in red
++ text in green
+! text in orange
+# text in gray
+@@ text in purple (and bold)@@
+```
    
 ```
     # LAMMPS input script
