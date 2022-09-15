@@ -9,22 +9,7 @@ Creating a box of water
 
 .. raw:: html
 
-   <p style="color:red;">I am red</p>
-
-
-.. raw:: html
-
-    <p>An example of using <span color="red">interpreted text</span></p>
-
-.. raw:: html
-
-   <div>
-        <pre>
-            units real
-            
-        </pre>
-        <p style="color:red;">I am required</p>
-   </div>
+   <b>I am red</b>
    
 .. code-block:: python
 
