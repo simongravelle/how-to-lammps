@@ -12,8 +12,9 @@ Creating a box of water
    <div>
         <pre>
             units real
-            <p style="color:red;">I am required</p>
+            
         </pre>
+        <p style="color:red;">I am required</p>
    </div>
    
 .. code-block:: python
