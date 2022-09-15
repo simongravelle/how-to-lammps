@@ -7,6 +7,12 @@ ends in order to extend it.
 Creating a box of water
 -----------------------
 
+.. raw:: html
+
+   <div>Some stuff <pre>some <b>bold</b> text</pre>...</div>
+
+   <p style="color:red;">I am red</p>
+
 .. code-block:: python
 
     # LAMMPS input script
