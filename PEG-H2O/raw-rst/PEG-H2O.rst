@@ -9,13 +9,7 @@ Creating a box of water
 
 .. raw:: html
 
-    <style> .red {color:red} </style>
-
-.. role:: red
-
-1) UTC+2: 2021-06-10T09:00:42\ :red:`+02:00`
-2) UTC: 2021-06-10T09:00:42\ :red:`Z`
-
+    <p>An example of using <span color="red">interpreted text</span></p>
 
 .. raw:: html
 
