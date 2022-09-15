@@ -4,7 +4,9 @@ Pulling a PEG molecule in water
 Creating a box of water
 -----------------------
 
-.. code-block::units real
+.. code-block::
+
+    units real
     atom_style full
     bond_style harmonic
     angle_style charmm
