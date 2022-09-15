@@ -32,7 +32,6 @@ fix myshk H2O shake 1.0e-4 200 0 b 1 a 1 mol h2omol
 fix mynpt all npt temp 300 300 100 iso 1 1 1000
 
 dump mydmp all atom 100 dump.lammpstrj
-
 variable mytemp equal temp
 variable myvol equal vol
 fix myat1 all ave/time 10 10 100 v_mytemp file temperature.dat
