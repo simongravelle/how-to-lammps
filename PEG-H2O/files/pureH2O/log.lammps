@@ -1,0 +1,241 @@
+LAMMPS (23 Jun 2022)
+# pure bulk water system
+# Written by Simon Gravelle
+# My personal page : https://simongravelle.github.io/
+# My Github account: https://github.com/simongravelle/
+# LAMMPS tutorials for beginners: https://lammpstutorials.github.io/
+
+units real
+atom_style full
+bond_style harmonic
+angle_style charmm
+dihedral_style charmm
+pair_style lj/cut/tip4p/long 1 2 1 1 0.1546 12.0
+kspace_style pppm/tip4p 1.0e-4
+
+region box block -40 40 -15 15 -15 15
+create_box 7 box  bond/types 6  angle/types 9  dihedral/types 14  extra/bond/per/atom 2  extra/angle/per/atom 1  extra/special/per/atom 2
+Created orthogonal box = (-40 -15 -15) to (40 15 15)
+  4 by 1 by 1 MPI processor grid
+
+include ../PARM.lammps
+# Mass
+
+mass 		1 15.9994 # H2O O
+mass 		2 1.008 # H2O H
+mass 		3 12.011 # CC32A
+mass 		4 15.9994 # OC30A
+mass 		5 1.008 # HCA2
+mass 		6 15.9994 # OC311
+mass 		7 1.008 # HCP1
+
+# Pair Coeff
+
+pair_coeff 	1 1 0.185199 3.1589
+pair_coeff 	2 2 0.0 0.0
+pair_coeff 	3 3 0.056 3.58141
+pair_coeff 	4 4 0.100 2.93997
+pair_coeff 	5 5 0.035 2.38761
+pair_coeff 	6 6 0.192 3.14487
+pair_coeff 	7 7 0.046 0.40001
+
+# Bond coeff
+
+bond_coeff 	1 0 0.9572
+bond_coeff 	2 222.35 1.5300
+bond_coeff 	3 308.79 1.1111
+bond_coeff 	4 359.76 1.1415
+bond_coeff 	5 427.715 1.1420
+bond_coeff 	6 544.635 0.9600
+
+# Angle coeff
+
+angle_coeff 	1 0 104.52 0 0
+angle_coeff	2 50.0000 109.0000 0.0000 0.0000
+angle_coeff	3 26.5000 110.1000 22.5300 2.179
+angle_coeff	4 45.0000 111.5000 0.0000 0.0000
+angle_coeff	5 13.0258 109.4000 0.0000 0.0000
+angle_coeff	6 35.5000 109.0000 5.4000 1.802
+angle_coeff	7 55.0000 108.8900 0.0000 0.0000
+angle_coeff	8 75.7000 110.1000 0.0000 0.0000
+angle_coeff	9 95.0000 109.7000 0.0000 0.0000
+
+# Dihedral coeff
+# weighting factor put to 0, possibly wrong
+
+dihedral_coeff	1 0.57 1 0 0
+dihedral_coeff	2 0.29 2 0 0
+dihedral_coeff	3 0.43 3 0 0
+dihedral_coeff	4 0.59 1 180 0
+dihedral_coeff	5 1.16 2 0 0
+dihedral_coeff	6 0.12 1 0 0
+dihedral_coeff	7 0.42 2 0 0
+dihedral_coeff	8 0.29 3 0 0
+dihedral_coeff	9 2.87 1 180 0
+dihedral_coeff	10 0.03 2 0 0
+dihedral_coeff	11 0.23 3 0 0
+dihedral_coeff	12 1.36 1 180 0
+dihedral_coeff	13 0.16 2 0 0
+dihedral_coeff	14 1.01 3 0 0
+
+
+molecule h2omol H2OTip4p.txt
+Read molecule template h2omol:
+  1 molecules
+  0 fragments
+  3 atoms with max type 2
+  2 bonds with max type 1
+  1 angles with max type 1
+  0 dihedrals with max type 0
+  0 impropers with max type 0
+create_atoms 0 random 500 456415 NULL mol h2omol 454756
+Created 1500 atoms
+  using lattice units in orthogonal box = (-40 -15 -15) to (40 15 15)
+  create_atoms CPU = 0.001 seconds
+group H2O type 1 2
+1500 atoms in group H2O
+delete_atoms overlap 2 H2O H2O mol yes
+System init for delete_atoms ...
+PPPM initialization ...
+  extracting TIP4P info from pair style
+  using 12-bit tables for long-range coulomb (../kspace.cpp:342)
+  G vector (1/distance) = 0.21686545
+  grid = 27 15 15
+  stencil order = 5
+  estimated absolute RMS force accuracy = 0.024887769
+  estimated relative force accuracy = 7.4948776e-05
+  using double precision KISS FFT
+  3d grid and FFT values/proc = 6292 1620
+Generated 21 of 21 mixed pair_coeff terms from geometric mixing rule
+Neighbor list info ...
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 14.3092
+  ghost atom cutoff = 14.3092
+  binsize = 7.1546, bins = 12 5 5
+  2 neighbor lists, perpetual/occasional/extra = 1 1 0
+  (1) command delete_atoms, occasional
+      attributes: full, newton on
+      pair build: full/bin
+      stencil: full/bin/3d
+      bin: standard
+  (2) pair lj/cut/tip4p/long, perpetual
+      attributes: half, newton on
+      pair build: half/bin/newton
+      stencil: half/bin/3d
+      bin: standard
+WARNING: Ignoring 'compress yes' for molecular system (../delete_atoms.cpp:140)
+Deleted 414 atoms, new total = 1086
+Deleted 276 bonds, new total = 724
+Deleted 138 angles, new total = 362
+
+fix myshk H2O shake 1.0e-4 200 0 b 1 a 1 mol h2omol
+       0 = # of size 2 clusters
+       0 = # of size 3 clusters
+       0 = # of size 4 clusters
+     362 = # of frozen angles
+  find clusters CPU = 0.000 seconds
+fix mynpt all npt temp 300 300 100 iso 1 1 1000
+
+dump mydmp all atom 100 dump.lammpstrj
+
+variable mytemp equal temp
+variable myvol equal vol
+fix myat1 all ave/time 10 10 100 v_mytemp file temperature.dat
+fix myat2 all ave/time 10 10 100 v_myvol file volume.dat
+
+timestep 1.0
+thermo 1000
+run 20000
+PPPM initialization ...
+  extracting TIP4P info from pair style
+  using 12-bit tables for long-range coulomb (../kspace.cpp:342)
+  G vector (1/distance) = 0.21686535
+  grid = 27 15 15
+  stencil order = 5
+  estimated absolute RMS force accuracy = 0.02117658
+  estimated relative force accuracy = 6.3772642e-05
+  using double precision KISS FFT
+  3d grid and FFT values/proc = 6292 1620
+Generated 21 of 21 mixed pair_coeff terms from geometric mixing rule
+Neighbor list info ...
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 14.3092
+  ghost atom cutoff = 14.3092
+  binsize = 7.1546, bins = 12 5 5
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair lj/cut/tip4p/long, perpetual
+      attributes: half, newton on
+      pair build: half/bin/newton
+      stencil: half/bin/3d
+      bin: standard
+Per MPI rank memory allocation (min/avg/max) = 9.696 | 9.715 | 9.737 Mbytes
+   Step          Temp          E_pair         E_mol          TotEng         Press          Volume    
+         0   0              237.94548      0              237.94548      1282.6023      72000        
+      1000   306.69026     -1504.0858      0             -843.12974     -36.679642      65108.251    
+      2000   301.75498     -2094.8631      0             -1444.5432     -101.7516       55502.6      
+      3000   286.41623     -2408.0686      0             -1790.8056     -86.993974      48806.377    
+      4000   294.5043      -2616.2113      0             -1981.5175     -188.36375      43394.866    
+      5000   308.0435      -2772.8029      0             -2108.9304     -59.883517      38738.457    
+      6000   306.61329     -2821.5682      0             -2160.778      -63.352453      34743.655    
+      7000   288.39503     -2885.4174      0             -2263.8899     -165.91468      30564.182    
+      8000   298.78126     -2933.6606      0             -2289.7495     -472.33683      27008.961    
+      9000   307.48625     -3027.2883      0             -2364.6168     -449.48852      23714.081    
+     10000   298.0971      -3053.5073      0             -2411.0706     -23.41358       20887.184    
+     11000   319.81091     -3088.221       0             -2398.9883     -85.517314      18310.165    
+     12000   287.25075     -3175.1432      0             -2556.0817     -321.06673      16683.291    
+     13000   303.20906     -3285.7527      0             -2632.299       263.28487      15151.557    
+     14000   305.65942     -3212.3473      0             -2553.6128      325.05494      14115.055    
+     15000   292.36547     -3291.3456      0             -2661.2613     -212.51166      13447.055    
+     16000   292.30902     -3371.0134      0             -2741.0507     -490.09817      12883.952    
+     17000   304.34426     -3388.6503      0             -2732.7502      40.38518       11776.607    
+     18000   291.31253     -3352.2233      0             -2724.4082     -81.080503      11374.601    
+     19000   306.91339     -3412.6487      0             -2751.2118      359.81165      11150.392    
+     20000   298.3984      -3416.4284      0             -2773.3423      214.89672      11293.3      
+Loop time of 121.261 on 4 procs for 20000 steps with 1086 atoms
+
+Performance: 14.250 ns/day, 1.684 hours/ns, 164.933 timesteps/s
+98.4% CPU use with 4 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 58.509     | 78.77      | 91.253     | 149.9 | 64.96
+Bond    | 0.016393   | 0.017601   | 0.018688   |   0.7 |  0.01
+Kspace  | 18.765     | 31.25      | 51.519     | 238.0 | 25.77
+Neigh   | 2.8725     | 2.8745     | 2.8764     |   0.1 |  2.37
+Comm    | 1.2003     | 1.3704     | 1.8325     |  22.8 |  1.13
+Output  | 0.06708    | 0.069038   | 0.071248   |   0.6 |  0.06
+Modify  | 5.3881     | 6.4981     | 6.9131     |  25.2 |  5.36
+Other   |            | 0.4124     |            |       |  0.34
+
+Nlocal:          271.5 ave         282 max         257 min
+Histogram: 1 0 0 0 0 0 1 1 0 1
+Nghost:         7315.5 ave        7379 max        7252 min
+Histogram: 1 0 1 0 0 0 0 1 0 1
+Neighs:         160297 ave      171692 max      148904 min
+Histogram: 1 0 0 0 1 1 0 0 0 1
+
+Total # of neighbors = 641188
+Ave neighs/atom = 590.41252
+Ave special neighs/atom = 2
+Neighbor list builds = 913
+Dangerous builds = 3
+
+write_data H2O.data
+System init for write_data ...
+PPPM initialization ...
+  extracting TIP4P info from pair style
+  using 12-bit tables for long-range coulomb (../kspace.cpp:342)
+  G vector (1/distance) = 0.23017985
+  grid = 18 9 9
+  stencil order = 5
+  estimated absolute RMS force accuracy = 0.022691941
+  estimated relative force accuracy = 6.8336107e-05
+  using double precision KISS FFT
+  3d grid and FFT values/proc = 2560 486
+Generated 21 of 21 mixed pair_coeff terms from geometric mixing rule
+
+
+Total wall time: 0:02:01

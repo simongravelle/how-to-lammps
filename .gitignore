@@ -1,0 +1,25 @@
+# MDAnalysis stuff
+**/*xtc_offsets.npz
+**/*xtc_offsets.lock
+
+# pycharm virtual environment stuff:
+venv
+.idea
+
+# python stuff:
+__pycache__
+**/__pycache__
+
+# jupyter-notebook stuff:
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+
+.tox/
+docs/bin/
+docs/lib/
+docs/pyvenv.cfg
+
+# LAMMPS
+**/*.lammpstrj
+**/*.log
+**/*.dat
