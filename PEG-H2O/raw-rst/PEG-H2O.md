@@ -7,6 +7,8 @@ ends in order to extend it.
 Creating a box of water
 -----------------------
 
+<span style=“color:green;”> text goes here</span>
+
 ```diff
 - text in red
 + text in green
