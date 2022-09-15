@@ -37,8 +37,7 @@ Creating a box of water
 - This is :blue:`Blue` text.
 - This is :green:`Green` text.
    
-.. code-block:: python
-
+```
     # LAMMPS input script
     units real
     atom_style full
@@ -47,6 +46,8 @@ Creating a box of water
     dihedral_style charmm
     pair_style lj/cut/tip4p/long 1 2 1 1 0.1546 12.0
     kspace_style pppm/tip4p 1.0e-4
+
+```
 
 Note: The atom_style `full` is required for charged molecules, and the pair_style `lj/cut/tip4p/long`
 is a Lennard-Jones (cut) - Coulomb (long) pair style specifically adapted to 4 points water models,
