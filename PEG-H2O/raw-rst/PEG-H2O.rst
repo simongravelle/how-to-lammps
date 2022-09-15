@@ -7,11 +7,11 @@ ends in order to extend it.
 Creating a box of water
 -----------------------
 
-.. code-block::
+.. code-block:: python
 
     # LAMMPS input script
-    units :blue:`real`
-    atom_style { color: #75715e } full
+    units real
+    atom_style full
     bond_style harmonic
     angle_style charmm
     dihedral_style charmm
