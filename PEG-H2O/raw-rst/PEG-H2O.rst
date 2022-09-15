@@ -11,7 +11,7 @@ Creating a box of water
 
     # LAMMPS input script
     units :blue:`real`
-    atom_style full
+    atom_style { color: #75715e } full
     bond_style harmonic
     angle_style charmm
     dihedral_style charmm
