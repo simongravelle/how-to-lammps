@@ -10,8 +10,8 @@ Creating a box of water
 .. raw:: html
 
    <div>Some stuff <pre>some <b>bold</b> text</pre>...</div>
-
    <p style="color:red;">I am red</p>
+   <div style="background-color:red;color:white;padding:2%;">White text, red background.</div>
 
 .. code-block:: python
 
