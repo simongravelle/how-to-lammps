@@ -10,7 +10,7 @@ Creating a box of water
 .. code-block::
 
     # LAMMPS input script
-    units real
+    units :blue:`real`
     atom_style full
     bond_style harmonic
     angle_style charmm

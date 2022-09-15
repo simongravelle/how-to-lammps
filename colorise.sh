@@ -10,7 +10,17 @@ do
         #echo $line
 
         if [[ $line = " "* ]]; then
-            echo $line
+            newline=''
+            for val in $line
+            do   
+                if grep -Fxq $val lammps.constants
+                then 
+                    newline=$newline' '$val 
+                else 
+                    newline=$newline' '$val 
+                fi
+            done
+            echo $newline
         else
             echo $line >> $folder'/'$folder'.rst'
         fi
