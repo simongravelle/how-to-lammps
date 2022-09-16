@@ -7,7 +7,7 @@ ends in order to extend it.
 Creating a box of water
 -----------------------
 
-.. image:: PEG-H2O/files/pureH2O
+.. image:: PEG-H2O/files/pureH2O/water.webp
      :width: 600
 
 .. code-block:: python
