@@ -6,10 +6,9 @@ ends in order to extend it.
 
 Creating a box of water
 -----------------------
-    
+
 .. code-block:: python
 
-     # LAMMPS input script
      units real
      atom_style full
      bond_style harmonic
@@ -17,6 +16,7 @@ Creating a box of water
      dihedral_style charmm
      pair_style lj/cut/tip4p/long 1 2 1 1 0.1546 12.0
      kspace_style pppm/tip4p 1.0e-4
+
 
 Note: The atom_style `full` is required for charged molecules, and the pair_style `lj/cut/tip4p/long`
 is a Lennard-Jones (cut) - Coulomb (long) pair style specifically adapted to 4 points water models,
@@ -33,9 +33,11 @@ which is what we want here.
      extra/angle/per/atom 1 &
      extra/special/per/atom 2
 
+
 .. code-block::
 
      include ../PARM.lammps
+
 
 .. code-block::
 
@@ -44,10 +46,12 @@ which is what we want here.
      group H2O type 1 2
      delete_atoms overlap 2 H2O H2O mol yes
 
+
 .. code-block::
 
      fix myshk H2O shake 1.0e-4 200 0 b 1 a 1 mol h2omol
      fix mynpt all npt temp 300 300 100 iso 1 1 1000
+
 
 .. code-block::
 
@@ -57,11 +61,13 @@ which is what we want here.
      fix myat1 all ave/time 10 10 100 v_mytemp file temperature.dat
      fix myat2 all ave/time 10 10 100 v_myvol file volume.dat
 
+
 .. code-block::
 
      timestep 1.0
      thermo 1000
      run 20000
+
 
 .. code-block::
 

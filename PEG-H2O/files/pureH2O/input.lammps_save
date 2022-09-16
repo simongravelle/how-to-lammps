@@ -1,5 +1,5 @@
 # pure bulk water system
-# Written by Simon Gravelle
+# Written by Simon Gravelle 
 # My personal page : https://simongravelle.github.io/
 # My Github account: https://github.com/simongravelle/
 # LAMMPS tutorials for beginners: https://lammpstutorials.github.io/
@@ -14,12 +14,12 @@ kspace_style pppm/tip4p 1.0e-4
 
 region box block -40 40 -15 15 -15 15
 create_box 7 box &
-bond/types 6 &
-angle/types 9 &
-dihedral/types 14 &
-extra/bond/per/atom 2 &
-extra/angle/per/atom 1 &
-extra/special/per/atom 2
+ bond/types 6 &
+ angle/types 9 &
+ dihedral/types 14 &
+ extra/bond/per/atom 2 &
+ extra/angle/per/atom 1 &
+ extra/special/per/atom 2
 
 include ../PARM.lammps
 
@@ -42,3 +42,5 @@ thermo 1000
 run 20000
 
 write_data H2O.data
+
+
