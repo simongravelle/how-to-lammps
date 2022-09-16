@@ -1,5 +1,5 @@
-# water and PEG system
-# Written by Simon Gravelle 
+# pure bulk water system
+# Written by Simon Gravelle
 # My personal page : https://simongravelle.github.io/
 # My Github account: https://github.com/simongravelle/
 # LAMMPS tutorials for beginners: https://lammpstutorials.github.io/
@@ -24,8 +24,8 @@ group PEG type 3 4 5 6 7
 delete_atoms overlap 2.0 H2O PEG mol yes
 
 fix myshk H2O shake 1.0e-4 200 0 b 1 a 1
-fix mynvt all nvt temp 300 300 100
-timestep 0.1
+fix mynpt all npt temp 300 300 100 x 1 1 1000
+timestep 1.0
 
 dump mydmp all atom 100 dump.lammpstrj
 thermo 100
@@ -35,10 +35,4 @@ fix myat1 all ave/time 10 10 100 v_mytemp file temperature.dat
 fix myat2 all ave/time 10 10 100 v_myvol file volume.dat
 
 run 10000
-unfix mynvt
-
-fix mynpt all npt temp 300 300 100 x 1 1 1000
-timestep 1.0
-run 10000
-
 write_data mix.data

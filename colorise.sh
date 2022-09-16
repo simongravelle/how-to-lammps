@@ -35,17 +35,19 @@ do
         else
             if [[ $line = "#space"* ]]; 
             then
+                #echo $line
                 i=0
                 newline=''
                 for word in $line
                 do
+                    #echo $word
                     let i=$i+1
                     if (( $i > 1 )); then
                         newline=$newline' '$word
                     fi
                 done
                 # add to lammps input file
-                echo '$newline' >> $inputname
+                echo $newline >> $inputname
                 # write rst file
                 echo '    '$newline >> $newrst
             elif [[ $line = "# jump" ]]; 

@@ -1,5 +1,5 @@
-# water and pulled PEG system
-# Written by Simon Gravelle 
+# pure bulk water system
+# Written by Simon Gravelle
 # My personal page : https://simongravelle.github.io/
 # My Github account: https://github.com/simongravelle/
 # LAMMPS tutorials for beginners: https://lammpstutorials.github.io/
@@ -47,5 +47,3 @@ fix myaf1 oxygen_end1 addforce ${f0} 0 0
 fix myaf2 oxygen_end2 addforce -${f0} 0 0
 
 run 200000
-
-write_data pull.data

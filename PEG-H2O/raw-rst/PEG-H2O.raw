@@ -87,3 +87,246 @@ which is what we want here.
 .. code-block::
 
 #space write_data H2O.data
+
+Creating a single PEG in vacuum
+-------------------------------
+
+Anticipating the future merge, the box size is set to be 
+equal to the final water box. 
+
+.. code-block:: python
+
+# folder singlePEG file input.lammps
+#space units real
+#space atom_style full
+#space bond_style harmonic
+#space angle_style charmm
+#space dihedral_style charmm
+#space pair_style lj/cut/tip4p/long 1 2 1 1 0.1546 12.0
+#space kspace_style pppm/tip4p 1.0e-4
+
+# jump
+
+.. code-block:: python
+
+#space special_bonds lj 0.0 0.0 0.5
+
+# jump
+
+.. code-block:: python
+
+#space read_data init.data
+#space include ../PARM.lammps
+
+# jump
+
+.. code-block:: python
+
+#space group PEG type 3 4 5 6 7
+
+# jump
+
+.. code-block:: python
+
+#space dump mydmp all atom 10 dump.lammpstrj
+#space thermo 1
+
+# jump
+
+.. code-block:: python
+
+#space minimize 1.0e-4 1.0e-6 100 1000
+#space undump mydmp
+#space reset_timestep 0
+
+# jump
+
+.. code-block:: python
+
+#space fix mynve all nve
+#space fix myber all temp/berendsen 300 300 100
+
+# jump
+
+.. code-block:: python
+
+#space dump mydmp all atom 1000 dump.lammpstrj
+#space thermo 1000
+#space variable mytemp equal temp
+#space variable myvol equal vol
+#space fix myat1 all ave/time 10 10 100 v_mytemp file temperature.dat
+#space fix myat2 all ave/time 10 10 100 v_myvol file volume.dat
+
+# jump
+
+.. code-block:: python
+
+#space timestep 1
+#space run 10000
+
+# jump
+
+.. code-block:: python
+
+#space write_data PEG.data
+
+Solvating the PEG in water
+--------------------------
+
+.. image:: files/mergePEGH2O/solvatedPEG.webp
+   :width: 600
+
+.. code-block:: python
+
+# folder mergePEGH2O file input.lammps
+#space units real
+#space atom_style full
+#space bond_style harmonic
+#space angle_style charmm
+#space dihedral_style charmm
+#space pair_style lj/cut/tip4p/long 1 2 1 1 0.1546 12.0
+#space kspace_style pppm/tip4p 1.0e-4
+
+# jump
+
+.. code-block:: python
+
+#space special_bonds lj 0.0 0.0 0.5
+
+# jump
+
+.. code-block:: python
+
+#space read_data ../singlePEG/PEG.data
+#space read_data ../pureH2O/H2O.data add append
+#space include ../PARM.lammps
+
+# jump
+
+.. code-block:: python
+
+#space group H2O type 1 2
+#space group PEG type 3 4 5 6 7
+
+# jump
+
+.. code-block:: python
+
+#space delete_atoms overlap 2.0 H2O PEG mol yes
+
+# jump
+
+.. code-block:: python
+
+#space fix myshk H2O shake 1.0e-4 200 0 b 1 a 1
+#space fix mynpt all npt temp 300 300 100 x 1 1 1000
+#space timestep 1.0
+
+# jump
+
+.. code-block:: python
+
+#space dump mydmp all atom 100 dump.lammpstrj
+#space thermo 100
+#space variable mytemp equal temp
+#space variable myvol equal vol
+#space fix myat1 all ave/time 10 10 100 v_mytemp file temperature.dat
+#space fix myat2 all ave/time 10 10 100 v_myvol file volume.dat
+
+# jump
+
+.. code-block:: python
+
+#space run 10000
+#space write_data mix.data
+
+Pulling on the PEG
+------------------
+
+.. code-block:: python
+
+# folder pullonPEG file input.lammps
+
+#space variable f0 equal 1 # kcal/mol/A # 1 kcal/mol/A = 67.2 pN
+
+# jump
+
+.. code-block:: python
+
+#space units real
+#space atom_style full
+#space bond_style harmonic
+#space angle_style charmm
+#space dihedral_style charmm
+#space pair_style lj/cut/tip4p/long 1 2 1 1 0.1546 12.0
+#space kspace_style pppm/tip4p 1.0e-4
+
+# jump
+
+.. code-block:: python
+
+#space special_bonds lj 0.0 0.0 0.5
+
+# jump
+
+.. code-block:: python
+
+#space read_data ../mergePEGH2O/mix.data
+#space include ../PARM.lammps
+
+# jump
+
+.. code-block:: python
+
+#space group H2O type 1 2
+#space group PEG type 3 4 5 6 7
+#space group pull type 6
+#space group oxygen_end1 id 65
+#space group oxygen_end2 id 4
+
+# jump
+
+.. code-block:: python
+
+#space write_dump all atom dump.lammpstrj
+#space dump myxtc all xtc 50 traj.xtc
+
+# jump
+
+.. code-block:: python
+
+#space timestep 1
+#space fix myshk H2O shake 1.0e-4 200 0 b 1 a 1
+#space fix mynvt all nvt temp 300 300 100
+#space fix myrct PEG recenter INIT INIT INIT
+
+# jump
+
+.. code-block:: python
+
+#space variable mytemp equal temp
+#space fix myat1 all ave/time 10 10 100 v_mytemp file temperature.dat
+#space variable x1 equal xcm(oxygen_end1,x)
+#space variable x2 equal xcm(oxygen_end2,x)
+#space variable delta_x equal abs(v_x1-v_x2)
+#space fix myat2 all ave/time 10 10 100 v_delta_x file end-to-end-distance.dat
+#space thermo 10000
+
+# jump
+
+.. code-block:: python
+
+#space run 100000
+
+# jump
+
+.. code-block:: python
+
+#space fix myaf1 oxygen_end1 addforce ${f0} 0 0
+#space fix myaf2 oxygen_end2 addforce -${f0} 0 0
+
+# jump
+
+.. code-block:: python
+
+#space run 200000
