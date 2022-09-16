@@ -25,4 +25,4 @@ docs/pyvenv.cfg
 **/*.dat
 
 # vscode
-#**/.vscode/
+**/.vscode/
