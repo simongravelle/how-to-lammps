@@ -14,7 +14,7 @@ pair_style lj/cut/tip4p/long 1 2 1 1 0.1546 12.0
 kspace_style pppm/tip4p 1.0e-4
 
 region box block -40 40 -15 15 -15 15
-create_box 7 box  bond/types 6  angle/types 9  dihedral/types 14  extra/bond/per/atom 2  extra/angle/per/atom 1  extra/special/per/atom 2
+create_box 7 box bond/types 6 angle/types 9 dihedral/types 14 extra/bond/per/atom 2 extra/angle/per/atom 1 extra/special/per/atom 2
 Created orthogonal box = (-40 -15 -15) to (40 15 15)
   4 by 1 by 1 MPI processor grid
 
@@ -91,7 +91,7 @@ Read molecule template h2omol:
 create_atoms 0 random 500 456415 NULL mol h2omol 454756
 Created 1500 atoms
   using lattice units in orthogonal box = (-40 -15 -15) to (40 15 15)
-  create_atoms CPU = 0.001 seconds
+  create_atoms CPU = 0.002 seconds
 group H2O type 1 2
 1500 atoms in group H2O
 delete_atoms overlap 2 H2O H2O mol yes
@@ -137,8 +137,7 @@ fix myshk H2O shake 1.0e-4 200 0 b 1 a 1 mol h2omol
   find clusters CPU = 0.000 seconds
 fix mynpt all npt temp 300 300 100 iso 1 1 1000
 
-dump mydmp all atom 100 dump.lammpstrj
-
+dump mydmp all atom 10 dump.lammpstrj
 variable mytemp equal temp
 variable myvol equal vol
 fix myat1 all ave/time 10 10 100 v_mytemp file temperature.dat
@@ -193,22 +192,22 @@ Per MPI rank memory allocation (min/avg/max) = 9.696 | 9.715 | 9.737 Mbytes
      18000   291.31253     -3352.2233      0             -2724.4082     -81.080503      11374.601    
      19000   306.91339     -3412.6487      0             -2751.2118      359.81165      11150.392    
      20000   298.3984      -3416.4284      0             -2773.3423      214.89672      11293.3      
-Loop time of 121.261 on 4 procs for 20000 steps with 1086 atoms
+Loop time of 137.761 on 4 procs for 20000 steps with 1086 atoms
 
-Performance: 14.250 ns/day, 1.684 hours/ns, 164.933 timesteps/s
-98.4% CPU use with 4 MPI tasks x no OpenMP threads
+Performance: 12.543 ns/day, 1.913 hours/ns, 145.179 timesteps/s
+98.7% CPU use with 4 MPI tasks x no OpenMP threads
 
 MPI task timing breakdown:
 Section |  min time  |  avg time  |  max time  |%varavg| %total
 ---------------------------------------------------------------
-Pair    | 58.509     | 78.77      | 91.253     | 149.9 | 64.96
-Bond    | 0.016393   | 0.017601   | 0.018688   |   0.7 |  0.01
-Kspace  | 18.765     | 31.25      | 51.519     | 238.0 | 25.77
-Neigh   | 2.8725     | 2.8745     | 2.8764     |   0.1 |  2.37
-Comm    | 1.2003     | 1.3704     | 1.8325     |  22.8 |  1.13
-Output  | 0.06708    | 0.069038   | 0.071248   |   0.6 |  0.06
-Modify  | 5.3881     | 6.4981     | 6.9131     |  25.2 |  5.36
-Other   |            | 0.4124     |            |       |  0.34
+Pair    | 58.306     | 81.086     | 94.551     | 162.3 | 58.86
+Bond    | 0.037525   | 0.038202   | 0.039047   |   0.4 |  0.03
+Kspace  | 29.379     | 42.829     | 65.618     | 223.4 | 31.09
+Neigh   | 3.1366     | 3.1401     | 3.145      |   0.2 |  2.28
+Comm    | 1.763      | 1.99       | 2.4219     |  18.0 |  1.44
+Output  | 0.8547     | 0.91567    | 0.96199    |   4.2 |  0.66
+Modify  | 5.915      | 6.9586     | 7.5809     |  23.7 |  5.05
+Other   |            | 0.8041     |            |       |  0.58
 
 Nlocal:          271.5 ave         282 max         257 min
 Histogram: 1 0 0 0 0 0 1 1 0 1
@@ -236,6 +235,4 @@ PPPM initialization ...
   using double precision KISS FFT
   3d grid and FFT values/proc = 2560 486
 Generated 21 of 21 mixed pair_coeff terms from geometric mixing rule
-
-
-Total wall time: 0:02:01
+Total wall time: 0:02:17
