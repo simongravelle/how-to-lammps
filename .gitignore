@@ -21,8 +21,10 @@ docs/pyvenv.cfg
 
 # LAMMPS
 **/*.lammpstrj
-**/*.log
+**/log.*
 **/*.dat
 
 # vscode
 **/.vscode/
+
+**/videofiles

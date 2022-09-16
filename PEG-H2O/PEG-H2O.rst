@@ -66,7 +66,7 @@ which is what we want here.
 
      timestep 1.0
      thermo 1000
-     run 20000
+     run 30000
 
 
 .. code-block::
