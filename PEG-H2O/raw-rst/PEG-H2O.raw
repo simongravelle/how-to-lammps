@@ -6,17 +6,20 @@ ends in order to extend it.
 
 Creating a box of water
 -----------------------
+
+.. image:: PEG-H2O/files/pureH2O
+   :width: 600
    
 .. code-block:: python
 
-    # folder pureH2O file input.lammps
-    units real
-    atom_style full
-    bond_style harmonic
-    angle_style charmm
-    dihedral_style charmm
-    pair_style lj/cut/tip4p/long 1 2 1 1 0.1546 12.0
-    kspace_style pppm/tip4p 1.0e-4
+# folder pureH2O file input.lammps
+#space units real
+#space atom_style full
+#space bond_style harmonic
+#space angle_style charmm
+#space dihedral_style charmm
+#space pair_style lj/cut/tip4p/long 1 2 1 1 0.1546 12.0
+#space kspace_style pppm/tip4p 1.0e-4
 
 # jump
 
@@ -26,57 +29,57 @@ which is what we want here.
 
 .. code-block::
 
-    region box block -40 40 -15 15 -15 15
-    create_box 7 box &
-    bond/types 6 &
-    angle/types 9 &
-    dihedral/types 14 &
-    extra/bond/per/atom 2 &
-    extra/angle/per/atom 1 &
-    extra/special/per/atom 2
+#space region box block -40 40 -15 15 -15 15
+#space create_box 7 box &
+#space bond/types 6 &
+#space angle/types 9 &
+#space dihedral/types 14 &
+#space extra/bond/per/atom 2 &
+#space extra/angle/per/atom 1 &
+#space extra/special/per/atom 2
 
 # jump
 
 .. code-block::
 
-    include ../PARM.lammps
+#space include ../PARM.lammps
 
 # jump
 
 .. code-block::
 
-    molecule h2omol H2OTip4p.txt
-    create_atoms 0 random 500 456415 NULL mol h2omol 454756
-    group H2O type 1 2
-    delete_atoms overlap 2 H2O H2O mol yes
+#space molecule h2omol H2OTip4p.txt
+#space create_atoms 0 random 500 456415 NULL mol h2omol 454756
+#space group H2O type 1 2
+#space delete_atoms overlap 2 H2O H2O mol yes
 
 # jump
 
 .. code-block::
 
-    fix myshk H2O shake 1.0e-4 200 0 b 1 a 1 mol h2omol
-    fix mynpt all npt temp 300 300 100 iso 1 1 1000
+#space fix myshk H2O shake 1.0e-4 200 0 b 1 a 1 mol h2omol
+#space fix mynpt all npt temp 300 300 100 iso 1 1 1000
 
 # jump
 
 .. code-block::
 
-    dump mydmp all atom 100 dump.lammpstrj
-    variable mytemp equal temp
-    variable myvol equal vol
-    fix myat1 all ave/time 10 10 100 v_mytemp file temperature.dat
-    fix myat2 all ave/time 10 10 100 v_myvol file volume.dat
+#space dump mydmp all atom 1000 dump.lammpstrj
+#space variable mytemp equal temp
+#space variable myvol equal vol
+#space fix myat1 all ave/time 10 10 100 v_mytemp file temperature.dat
+#space fix myat2 all ave/time 10 10 100 v_myvol file volume.dat
 
 # jump
 
 .. code-block::
 
-    timestep 1.0
-    thermo 1000
-    run 30000
+#space timestep 1.0
+#space thermo 1000
+#space run 30000
 
 # jump
 
 .. code-block::
 
-    write_data H2O.data
+#space write_data H2O.data

@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+set -e
+
 while IFS="" read -r folder || [ -n "$folder" ]
 do
     newrst=$folder'/'$folder'.rst'
@@ -31,16 +33,28 @@ do
             echo '# LAMMPS tutorials for beginners: https://lammpstutorials.github.io/' >> $inputname
             echo "" >> $inputname
         else
-            if [[ $line = "    "* ]]; 
+            if [[ $line = "#space"* ]]; 
             then
+                i=0
+                newline=''
+                for word in $line
+                do
+                    let i=$i+1
+                    if (( $i > 1 )); then
+                        newline=$newline' '$word
+                    fi
+                done
                 # add to lammps input file
-                echo $line >> $inputname
+                echo '$newline' >> $inputname
                 # write rst file
-                echo '    '$line >> $newrst
+                echo '    '$newline >> $newrst
             elif [[ $line = "# jump" ]]; 
             then
                 # add a blank line to lammps input file
                 echo "" >> $inputname
+            elif [[ $line = *":width:"* ]]; 
+            then
+                echo '    '$line >> $newrst
             else
                 echo $line >> $newrst
             fi

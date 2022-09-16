@@ -7,6 +7,9 @@ ends in order to extend it.
 Creating a box of water
 -----------------------
 
+.. image:: PEG-H2O/files/pureH2O
+     :width: 600
+
 .. code-block:: python
 
      units real
@@ -55,7 +58,7 @@ which is what we want here.
 
 .. code-block::
 
-     dump mydmp all atom 100 dump.lammpstrj
+     dump mydmp all atom 1000 dump.lammpstrj
      variable mytemp equal temp
      variable myvol equal vol
      fix myat1 all ave/time 10 10 100 v_mytemp file temperature.dat

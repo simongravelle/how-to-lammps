@@ -341,6 +341,20 @@ display dof off
 display dof_fnumber 64.000000
 display dof_focaldist 0.700000
 mol new dump.lammpstrj type lammpstrj first 0 last -1 step 1 filebonds 1 autobonds 1 waitfor all
+graphics top color 2
+graphics top material 0
+graphics top line {-21.784569 -8.169213 -8.169213} {21.784569 -8.169213 -8.169213} style solid width 1
+graphics top line {-21.784569 -8.169213 -8.169213} {-21.784569 8.169213 -8.169213} style solid width 1
+graphics top line {-21.784569 -8.169213 -8.169213} {-21.784569 -8.169213 8.169213} style solid width 1
+graphics top line {21.784569 -8.169213 -8.169213} {21.784569 -8.169213 8.169213} style solid width 1
+graphics top line {-21.784569 8.169213 -8.169213} {21.784569 8.169213 -8.169213} style solid width 1
+graphics top line {-21.784569 -8.169213 8.169213} {-21.784569 8.169213 8.169213} style solid width 1
+graphics top line {21.784569 -8.169213 -8.169213} {21.784569 8.169213 -8.169213} style solid width 1
+graphics top line {-21.784569 8.169213 -8.169213} {-21.784569 8.169213 8.169213} style solid width 1
+graphics top line {-21.784569 -8.169213 8.169213} {21.784569 -8.169213 8.169213} style solid width 1
+graphics top line {21.784569 8.169213 8.169213} {21.784569 8.169213 -8.169213} style solid width 1
+graphics top line {21.784569 8.169213 8.169213} {21.784569 -8.169213 8.169213} style solid width 1
+graphics top line {21.784569 8.169213 8.169213} {-21.784569 8.169213 8.169213} style solid width 1
 mol delrep 0 top
 mol representation VDW 1.000000 37.000000
 mol color Name
@@ -616,7 +630,7 @@ mol clipplane color  5 7 top {0.5 0.5 0.5 }
 mol clipplane normal 5 7 top {0.0 0.0 1.0}
 mol clipplane status 5 7 top {0}
 mol rename top dump.lammpstrj
-set viewpoints([molinfo top]) {{{1 0 0 -0.238077} {0 1 0 0.00693565} {0 0 1 -0.0397809} {0 0 0 1}} {{1 0 0 0} {0 1 0 0} {0 0 1 0} {0 0 0 1}} {{0.0596895 0 0 0} {0 0.0596895 0 0} {0 0 0.0596895 0} {0 0 0 1}} {{1 0 0 0} {0 1 0 0} {0 0 1 0} {0 0 0 1}}}
+set viewpoints([molinfo top]) {{{1 0 0 -0.238077} {0 1 0 0.00693565} {0 0 1 -0.0397809} {0 0 0 1}} {{1 0 0 0} {0 1 0 0} {0 0 1 0} {0 0 0 1}} {{0.0715701 0 0 0} {0 0.0715701 0 0} {0 0 0.0715701 0} {0 0 0 1}} {{1 0 0 0} {0 1 0 0} {0 0 1 0} {0 0 0 1}}}
 lappend viewplist [molinfo top]
 set topmol [molinfo top]
 # done with molecule 1
