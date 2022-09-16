@@ -14,11 +14,6 @@ __pycache__
 .ipynb_checkpoints/
 **/.ipynb_checkpoints/
 
-.tox/
-docs/bin/
-docs/lib/
-docs/pyvenv.cfg
-
 # LAMMPS
 **/*.lammpstrj
 **/log.*

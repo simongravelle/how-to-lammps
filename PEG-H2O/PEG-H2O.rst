@@ -256,8 +256,7 @@ Pulling on the PEG
 
 .. code-block:: python
 
-     write_dump all atom dump.lammpstrj
-     dump myxtc all xtc 50 traj.xtc
+     dump mydmp all atom 200 dump.lammpstrj
 
 
 .. code-block:: python
