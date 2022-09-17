@@ -161,6 +161,7 @@ Solvating the PEG in water
 .. image:: files/mergePEGH2O/solvatedPEG.webp
      :width: 600
      :alt: PEG molecule in water.
+     :align: middle
 
 Video shows the PEG molecule in water. The system is equilibrated in
 the NPT ensemble.
