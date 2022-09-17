@@ -236,6 +236,9 @@ Video showing the PEG molecule being pulled in water.
      variable f0 equal 2 # kcal/mol/A # 1 kcal/mol/A = 67.2 pN
 
 
+*Comment -* The force is chosen to be large enough to overcome thermal agitation
+and entropic contribution from both water and PEG molecules.
+
 .. code-block:: python
 
      units real
