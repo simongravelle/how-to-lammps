@@ -19,13 +19,13 @@ Water molecules being equilibrated in the NPT ensemble.
 
 .. code-block:: python
 
-     units real
-     atom_style full
-     bond_style harmonic
-     angle_style charmm
-     dihedral_style charmm
-     pair_style lj/cut/tip4p/long 1 2 1 1 0.1546 12.0
-     kspace_style pppm/tip4p 1.0e-4
+    units real
+    atom_style full
+    bond_style harmonic
+    angle_style charmm
+    dihedral_style charmm
+    pair_style lj/cut/tip4p/long 1 2 1 1 0.1546 12.0
+    kspace_style pppm/tip4p 1.0e-4
 
 
 Note: The atom_style `full` is required for charged molecules, and the pair_style `lj/cut/tip4p/long`
@@ -34,54 +34,54 @@ which is what we want here.
 
 .. code-block::
 
-     region box block -40 40 -15 15 -15 15
-     create_box 7 box &
-     bond/types 6 &
-     angle/types 9 &
-     dihedral/types 14 &
-     extra/bond/per/atom 2 &
-     extra/angle/per/atom 1 &
-     extra/special/per/atom 2
+    region box block -40 40 -15 15 -15 15
+    create_box 7 box &
+    bond/types 6 &
+    angle/types 9 &
+    dihedral/types 14 &
+    extra/bond/per/atom 2 &
+    extra/angle/per/atom 1 &
+    extra/special/per/atom 2
 
 
 .. code-block::
 
-     include ../PARM.lammps
+    include ../PARM.lammps
 
 
 .. code-block::
 
-     molecule h2omol H2OTip4p.txt
-     create_atoms 0 random 500 456415 NULL mol h2omol 454756
-     group H2O type 1 2
-     delete_atoms overlap 2 H2O H2O mol yes
+    molecule h2omol H2OTip4p.txt
+    create_atoms 0 random 500 456415 NULL mol h2omol 454756
+    group H2O type 1 2
+    delete_atoms overlap 2 H2O H2O mol yes
 
 
 .. code-block::
 
-     fix myshk H2O shake 1.0e-4 200 0 b 1 a 1 mol h2omol
-     fix mynpt all npt temp 300 300 100 iso 1 1 1000
+    fix myshk H2O shake 1.0e-4 200 0 b 1 a 1 mol h2omol
+    fix mynpt all npt temp 300 300 100 iso 1 1 1000
 
 
 .. code-block::
 
-     dump mydmp all atom 1000 dump.lammpstrj
-     variable mytemp equal temp
-     variable myvol equal vol
-     fix myat1 all ave/time 10 10 100 v_mytemp file temperature.dat
-     fix myat2 all ave/time 10 10 100 v_myvol file volume.dat
+    dump mydmp all atom 1000 dump.lammpstrj
+    variable mytemp equal temp
+    variable myvol equal vol
+    fix myat1 all ave/time 10 10 100 v_mytemp file temperature.dat
+    fix myat2 all ave/time 10 10 100 v_myvol file volume.dat
 
 
 .. code-block::
 
-     timestep 1.0
-     thermo 1000
-     run 30000
+    timestep 1.0
+    thermo 1000
+    run 30000
 
 
 .. code-block::
 
-     write_data H2O.data
+    write_data H2O.data
 
 Creating a single PEG in vacuum
 -------------------------------
@@ -91,69 +91,69 @@ equal to the final water box.
 
 .. code-block:: python
 
-     units real
-     atom_style full
-     bond_style harmonic
-     angle_style charmm
-     dihedral_style charmm
-     pair_style lj/cut/tip4p/long 1 2 1 1 0.1546 12.0
-     kspace_style pppm/tip4p 1.0e-4
+    units real
+    atom_style full
+    bond_style harmonic
+    angle_style charmm
+    dihedral_style charmm
+    pair_style lj/cut/tip4p/long 1 2 1 1 0.1546 12.0
+    kspace_style pppm/tip4p 1.0e-4
 
 
 .. code-block:: python
 
-     special_bonds lj 0.0 0.0 0.5
+    special_bonds lj 0.0 0.0 0.5
 
 
 .. code-block:: python
 
-     read_data init.data
-     include ../PARM.lammps
+    read_data init.data
+    include ../PARM.lammps
 
 
 .. code-block:: python
 
-     group PEG type 3 4 5 6 7
+    group PEG type 3 4 5 6 7
 
 
 .. code-block:: python
 
-     dump mydmp all atom 10 dump.lammpstrj
-     thermo 1
+    dump mydmp all atom 10 dump.lammpstrj
+    thermo 1
 
 
 .. code-block:: python
 
-     minimize 1.0e-4 1.0e-6 100 1000
-     undump mydmp
-     reset_timestep 0
+    minimize 1.0e-4 1.0e-6 100 1000
+    undump mydmp
+    reset_timestep 0
 
 
 .. code-block:: python
 
-     fix mynve all nve
-     fix myber all temp/berendsen 300 300 100
+    fix mynve all nve
+    fix myber all temp/berendsen 300 300 100
 
 
 .. code-block:: python
 
-     dump mydmp all atom 1000 dump.lammpstrj
-     thermo 1000
-     variable mytemp equal temp
-     variable myvol equal vol
-     fix myat1 all ave/time 10 10 100 v_mytemp file temperature.dat
-     fix myat2 all ave/time 10 10 100 v_myvol file volume.dat
+    dump mydmp all atom 1000 dump.lammpstrj
+    thermo 1000
+    variable mytemp equal temp
+    variable myvol equal vol
+    fix myat1 all ave/time 10 10 100 v_mytemp file temperature.dat
+    fix myat2 all ave/time 10 10 100 v_myvol file volume.dat
 
 
 .. code-block:: python
 
-     timestep 1
-     run 10000
+    timestep 1
+    run 10000
 
 
 .. code-block:: python
 
-     write_data PEG.data
+    write_data PEG.data
 
 Solvating the PEG in water
 --------------------------
@@ -167,59 +167,59 @@ the NPT ensemble.
 
 .. code-block:: python
 
-     units real
-     atom_style full
-     bond_style harmonic
-     angle_style charmm
-     dihedral_style charmm
-     pair_style lj/cut/tip4p/long 1 2 1 1 0.1546 12.0
-     kspace_style pppm/tip4p 1.0e-4
+    units real
+    atom_style full
+    bond_style harmonic
+    angle_style charmm
+    dihedral_style charmm
+    pair_style lj/cut/tip4p/long 1 2 1 1 0.1546 12.0
+    kspace_style pppm/tip4p 1.0e-4
 
 
 .. code-block:: python
 
-     special_bonds lj 0.0 0.0 0.5
+    special_bonds lj 0.0 0.0 0.5
 
 
 .. code-block:: python
 
-     read_data ../singlePEG/PEG.data
-     read_data ../pureH2O/H2O.data add append
-     include ../PARM.lammps
+    read_data ../singlePEG/PEG.data
+    read_data ../pureH2O/H2O.data add append
+    include ../PARM.lammps
 
 
 .. code-block:: python
 
-     group H2O type 1 2
-     group PEG type 3 4 5 6 7
+    group H2O type 1 2
+    group PEG type 3 4 5 6 7
 
 
 .. code-block:: python
 
-     delete_atoms overlap 2.0 H2O PEG mol yes
+    delete_atoms overlap 2.0 H2O PEG mol yes
 
 
 .. code-block:: python
 
-     fix myshk H2O shake 1.0e-4 200 0 b 1 a 1
-     fix mynpt all npt temp 300 300 100 x 1 1 1000
-     timestep 1.0
+    fix myshk H2O shake 1.0e-4 200 0 b 1 a 1
+    fix mynpt all npt temp 300 300 100 x 1 1 1000
+    timestep 1.0
 
 
 .. code-block:: python
 
-     dump mydmp all atom 100 dump.lammpstrj
-     thermo 100
-     variable mytemp equal temp
-     variable myvol equal vol
-     fix myat1 all ave/time 10 10 100 v_mytemp file temperature.dat
-     fix myat2 all ave/time 10 10 100 v_myvol file volume.dat
+    dump mydmp all atom 100 dump.lammpstrj
+    thermo 100
+    variable mytemp equal temp
+    variable myvol equal vol
+    fix myat1 all ave/time 10 10 100 v_mytemp file temperature.dat
+    fix myat2 all ave/time 10 10 100 v_myvol file volume.dat
 
 
 .. code-block:: python
 
-     run 10000
-     write_data mix.data
+    run 10000
+    write_data mix.data
 
 Pulling on the PEG
 ------------------
@@ -227,75 +227,75 @@ Pulling on the PEG
 .. code-block:: python
 
 
-     variable f0 equal 2 # kcal/mol/A # 1 kcal/mol/A = 67.2 pN
+    variable f0 equal 2 # kcal/mol/A # 1 kcal/mol/A = 67.2 pN
 
 
 .. code-block:: python
 
-     units real
-     atom_style full
-     bond_style harmonic
-     angle_style charmm
-     dihedral_style charmm
-     pair_style lj/cut/tip4p/long 1 2 1 1 0.1546 12.0
-     kspace_style pppm/tip4p 1.0e-4
+    units real
+    atom_style full
+    bond_style harmonic
+    angle_style charmm
+    dihedral_style charmm
+    pair_style lj/cut/tip4p/long 1 2 1 1 0.1546 12.0
+    kspace_style pppm/tip4p 1.0e-4
 
 
 .. code-block:: python
 
-     special_bonds lj 0.0 0.0 0.5
+    special_bonds lj 0.0 0.0 0.5
 
 
 .. code-block:: python
 
-     read_data ../mergePEGH2O/mix.data
-     include ../PARM.lammps
+    read_data ../mergePEGH2O/mix.data
+    include ../PARM.lammps
 
 
 .. code-block:: python
 
-     group H2O type 1 2
-     group PEG type 3 4 5 6 7
-     group pull type 6
-     group oxygen_end1 id 65
-     group oxygen_end2 id 4
+    group H2O type 1 2
+    group PEG type 3 4 5 6 7
+    group pull type 6
+    group oxygen_end1 id 65
+    group oxygen_end2 id 4
 
 
 .. code-block:: python
 
-     dump mydmp all atom 200 dump.lammpstrj
+    dump mydmp all atom 200 dump.lammpstrj
 
 
 .. code-block:: python
 
-     timestep 1
-     fix myshk H2O shake 1.0e-4 200 0 b 1 a 1
-     fix mynvt all nvt temp 300 300 100
-     fix myrct PEG recenter INIT INIT INIT
+    timestep 1
+    fix myshk H2O shake 1.0e-4 200 0 b 1 a 1
+    fix mynvt all nvt temp 300 300 100
+    fix myrct PEG recenter INIT INIT INIT
 
 
 .. code-block:: python
 
-     variable mytemp equal temp
-     fix myat1 all ave/time 10 10 100 v_mytemp file temperature.dat
-     variable x1 equal xcm(oxygen_end1,x)
-     variable x2 equal xcm(oxygen_end2,x)
-     variable delta_x equal abs(v_x1-v_x2)
-     fix myat2 all ave/time 10 10 100 v_delta_x file end-to-end-distance.dat
-     thermo 10000
+    variable mytemp equal temp
+    fix myat1 all ave/time 10 10 100 v_mytemp file temperature.dat
+    variable x1 equal xcm(oxygen_end1,x)
+    variable x2 equal xcm(oxygen_end2,x)
+    variable delta_x equal abs(v_x1-v_x2)
+    fix myat2 all ave/time 10 10 100 v_delta_x file end-to-end-distance.dat
+    thermo 10000
 
 
 .. code-block:: python
 
-     run 100000
+    run 100000
 
 
 .. code-block:: python
 
-     fix myaf1 oxygen_end1 addforce ${f0} 0 0
-     fix myaf2 oxygen_end2 addforce -${f0} 0 0
+    fix myaf1 oxygen_end1 addforce ${f0} 0 0
+    fix myaf2 oxygen_end2 addforce -${f0} 0 0
 
 
 .. code-block:: python
 
-     run 200000
+    run 200000
