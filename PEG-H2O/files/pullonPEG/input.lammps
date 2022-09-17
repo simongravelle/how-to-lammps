@@ -24,7 +24,7 @@ group PEG type 3 4 5 6 7
 group oxygen_end1 id 65
 group oxygen_end2 id 4
 
-dump mydmp all atom 1000 dump.lammpstrj
+dump mydmp all atom 10 dump.lammpstrj
 # write_dump all atom dump.lammpstrj
 # dump myxtc xtc atom 1000 dump.xtc
 
@@ -40,9 +40,9 @@ variable delta_x equal abs(v_x1-v_x2)
 fix myat2 all ave/time 10 10 100 v_delta_x file end-to-end-distance.dat
 thermo 10000
 
-run 100000
+run 1000
 
 fix myaf1 oxygen_end1 addforce ${f0} 0 0
 fix myaf2 oxygen_end2 addforce -${f0} 0 0
 
-run 200000
+run 20000

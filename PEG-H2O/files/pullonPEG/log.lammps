@@ -40,8 +40,8 @@ read_data ../mergePEGH2O/mix.data
   6 = max # of 1-3 neighbors
   12 = max # of 1-4 neighbors
   14 = max # of special neighbors
-  special bonds CPU = 0.00031521 secs
-  read_data CPU = 0.00694095 secs
+  special bonds CPU = 0.000399222 secs
+  read_data CPU = 0.00924499 secs
 include ../PARM.lammps
 # Mass
 
@@ -103,8 +103,6 @@ dihedral_coeff	13 0.16 2 0 0
 dihedral_coeff	14 1.01 3 0 0
 
 
-displace_atoms all move 0 2.5 0 units box
-
 group H2O type 1 2
 987 atoms in group H2O
 group PEG type 3 4 5 6 7
@@ -114,8 +112,9 @@ group oxygen_end1 id 65
 group oxygen_end2 id 4
 1 atoms in group oxygen_end2
 
-dump mydmp all atom 200 dump.lammpstrj
+dump mydmp all atom 10 dump.lammpstrj
 # write_dump all atom dump.lammpstrj
+# dump myxtc xtc atom 1000 dump.xtc
 
 timestep 1
 fix myshk H2O shake 1.0e-4 200 0 b 1 a 1
@@ -123,9 +122,8 @@ fix myshk H2O shake 1.0e-4 200 0 b 1 a 1
   0 = # of size 3 clusters
   0 = # of size 4 clusters
   329 = # of frozen angles
-  find clusters CPU = 0.000195311 secs
+  find clusters CPU = 0.00032907 secs
 fix mynvt all nvt temp 300 300 100
-fix myrct PEG recenter INIT INIT INIT
 
 variable mytemp equal temp
 fix myat1 all ave/time 10 10 100 v_mytemp file temperature.dat
@@ -135,7 +133,7 @@ variable delta_x equal abs(v_x1-v_x2)
 fix myat2 all ave/time 10 10 100 v_delta_x file end-to-end-distance.dat
 thermo 10000
 
-run 100000
+run 1000
 PPPM initialization ...
   extracting TIP4P info from pair style
   using 12-bit tables for long-range coulomb (src/kspace.cpp:323)
@@ -151,4 +149,43 @@ Neighbor list info ...
   max neighbors/atom: 2000, page size: 100000
   master list distance cutoff = 14.3092
   ghost atom cutoff = 14.3092
-  binsize 
+  binsize = 7.1546, bins = 6 3 3
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair lj/cut/tip4p/long, perpetual
+      attributes: half, newton on
+      pair build: half/bin/newton
+      stencil: half/bin/3d/newton
+      bin: standard
+Per MPI rank memory allocation (min/avg/max) = 13.9 | 13.95 | 14.09 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0    303.02824   -3171.4329    89.633856   -2428.7351   -696.00388 
+    1000    316.23434    -3127.765    86.291444   -2359.9488   -664.27641 
+Loop time of 5.84307 on 4 procs for 1000 steps with 1053 atoms
+
+Performance: 14.787 ns/day, 1.623 hours/ns, 171.143 timesteps/s
+99.2% CPU use with 4 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 4.5404     | 4.7629     | 4.8874     |   6.3 | 81.51
+Bond    | 0.0012239  | 0.006175   | 0.013792   |   6.7 |  0.11
+Kspace  | 0.46868    | 0.60097    | 0.82937    |  18.1 | 10.29
+Neigh   | 0.19846    | 0.19861    | 0.19887    |   0.0 |  3.40
+Comm    | 0.10336    | 0.10582    | 0.10768    |   0.5 |  1.81
+Output  | 0.034684   | 0.037273   | 0.039657   |   1.0 |  0.64
+Modify  | 0.11834    | 0.11875    | 0.11907    |   0.1 |  2.03
+Other   |            | 0.01255    |            |       |  0.21
+
+Nlocal:    263.25 ave 278 max 257 min
+Histogram: 3 0 0 0 0 0 0 0 0 1
+Nghost:    7490 ave 7527 max 7446 min
+Histogram: 1 0 0 0 1 0 0 1 0 1
+Neighs:    160501 ave 172241 max 154353 min
+Histogram: 1 1 1 0 0 0 0 0 0 1
+
+Total # of neighbors = 642004
+Ave neighs/atom = 609.69
+Ave special neighs/atom = 2.47863
+Neighbor list builds = 42
+Dangerous builds = 0
