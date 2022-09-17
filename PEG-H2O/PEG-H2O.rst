@@ -157,6 +157,10 @@ Solvating the PEG in water
 
 .. image:: files/mergePEGH2O/solvatedPEG.webp
      :width: 600
+:alt: PEG molecule being solvated in water
+
+Video shows the PEG molecule in water. The system is equilibrated in
+the NPT ensemble.
 
 .. code-block:: python
 
@@ -220,7 +224,7 @@ Pulling on the PEG
 .. code-block:: python
 
 
-     variable f0 equal 1 # kcal/mol/A # 1 kcal/mol/A = 67.2 pN
+     variable f0 equal 2 # kcal/mol/A # 1 kcal/mol/A = 67.2 pN
 
 
 .. code-block:: python
