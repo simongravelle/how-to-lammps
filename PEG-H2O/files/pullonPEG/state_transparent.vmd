@@ -609,7 +609,7 @@ mol clipplane center 5 6 top {0.0 0.0 0.0}
 mol clipplane color  5 6 top {0.5 0.5 0.5 }
 mol clipplane normal 5 6 top {0.0 0.0 1.0}
 mol clipplane status 5 6 top {0}
-mol representation QuickSurf 1.300000 1.926270 0.650000 3.000000
+mol representation QuickSurf 1.500000 2.200000 0.650000 3.000000
 mol color Name
 mol selection {type 1 3 4 5 6 7 }
 mol material mytransparent
@@ -644,7 +644,7 @@ mol clipplane color  5 7 top {0.5 0.5 0.5 }
 mol clipplane normal 5 7 top {0.0 0.0 1.0}
 mol clipplane status 5 7 top {0}
 mol rename top dump.lammpstrj
-set viewpoints([molinfo top]) {{{1 0 0 -0.0596896} {0 1 0 -0.0919277} {0 0 1 -0.0867952} {0 0 0 1}} {{1 0 0 0} {0 1 0 0} {0 0 1 0} {0 0 0 1}} {{0.133423 0 0 0} {0 0.133423 0 0} {0 0 0.133423 0} {0 0 0 1}} {{1 0 0 0} {0 1 0 0} {0 0 1 0} {0 0 0 1}}}
+set viewpoints([molinfo top]) {{{1 0 0 0.101784} {0 1 0 0.0672141} {0 0 1 -0.0260923} {0 0 0 1}} {{1 0 0 0} {0 1 0 0} {0 0 1 0} {0 0 0 1}} {{0.134352 0 0 0} {0 0.134352 0 0} {0 0 0.134352 0} {0 0 0 1}} {{1 0 0 0} {0 1 0 0} {0 0 1 0} {0 0 0 1}}}
 lappend viewplist [molinfo top]
 set topmol [molinfo top]
 # done with molecule 1
@@ -852,7 +852,7 @@ color scale colors CET_R2 {0.0 0.0 0.0} {0.0 0.0 0.0} {0.0 0.0 0.0}
   color change rgb 12 0.5 0.8999999761581421 0.4000000059604645
   color change rgb 13 0.8999999761581421 0.4000000059604645 0.699999988079071
   color change rgb 14 0.5 0.30000001192092896 0.0
-  color change rgb 15 0.6543689966201782 0.7279186844825745 1.0
+  color change rgb 15 0.0 0.8143491148948669 1.0
   color change rgb 17 0.8799999952316284 0.9700000286102295 0.019999999552965164
   color change rgb 18 0.550000011920929 0.8999999761581421 0.019999999552965164
   color change rgb 19 0.0 0.8999999761581421 0.03999999910593033

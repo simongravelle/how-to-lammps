@@ -40,8 +40,8 @@ read_data ../mergePEGH2O/mix.data
   6 = max # of 1-3 neighbors
   12 = max # of 1-4 neighbors
   14 = max # of special neighbors
-  special bonds CPU = 0.000399222 secs
-  read_data CPU = 0.00924499 secs
+  special bonds CPU = 0.000356018 secs
+  read_data CPU = 0.00657411 secs
 include ../PARM.lammps
 # Mass
 
@@ -103,6 +103,8 @@ dihedral_coeff	13 0.16 2 0 0
 dihedral_coeff	14 1.01 3 0 0
 
 
+displace_atoms all move 0 2.5 0 units box
+
 group H2O type 1 2
 987 atoms in group H2O
 group PEG type 3 4 5 6 7
@@ -122,7 +124,7 @@ fix myshk H2O shake 1.0e-4 200 0 b 1 a 1
   0 = # of size 3 clusters
   0 = # of size 4 clusters
   329 = # of frozen angles
-  find clusters CPU = 0.00032907 secs
+  find clusters CPU = 0.00018863 secs
 fix mynvt all nvt temp 300 300 100
 
 variable mytemp equal temp
@@ -158,34 +160,87 @@ Neighbor list info ...
       bin: standard
 Per MPI rank memory allocation (min/avg/max) = 13.9 | 13.95 | 14.09 Mbytes
 Step Temp E_pair E_mol TotEng Press 
-       0    303.02824   -3171.4329    89.633856   -2428.7351   -696.00388 
-    1000    316.23434    -3127.765    86.291444   -2359.9488   -664.27641 
-Loop time of 5.84307 on 4 procs for 1000 steps with 1053 atoms
+       0    303.02824    -3171.435    89.633856   -2428.7372   -696.02535 
+    1000    317.21009   -3131.6423    81.794894   -2366.2198    513.05406 
+Loop time of 6.03423 on 4 procs for 1000 steps with 1053 atoms
 
-Performance: 14.787 ns/day, 1.623 hours/ns, 171.143 timesteps/s
-99.2% CPU use with 4 MPI tasks x no OpenMP threads
+Performance: 14.318 ns/day, 1.676 hours/ns, 165.721 timesteps/s
+99.4% CPU use with 4 MPI tasks x no OpenMP threads
 
 MPI task timing breakdown:
 Section |  min time  |  avg time  |  max time  |%varavg| %total
 ---------------------------------------------------------------
-Pair    | 4.5404     | 4.7629     | 4.8874     |   6.3 | 81.51
-Bond    | 0.0012239  | 0.006175   | 0.013792   |   6.7 |  0.11
-Kspace  | 0.46868    | 0.60097    | 0.82937    |  18.1 | 10.29
-Neigh   | 0.19846    | 0.19861    | 0.19887    |   0.0 |  3.40
-Comm    | 0.10336    | 0.10582    | 0.10768    |   0.5 |  1.81
-Output  | 0.034684   | 0.037273   | 0.039657   |   1.0 |  0.64
-Modify  | 0.11834    | 0.11875    | 0.11907    |   0.1 |  2.03
-Other   |            | 0.01255    |            |       |  0.21
+Pair    | 4.6949     | 4.8542     | 4.9944     |   5.6 | 80.44
+Bond    | 0.00125    | 0.0062641  | 0.014163   |   6.8 |  0.10
+Kspace  | 0.53416    | 0.6824     | 0.84646    |  15.1 | 11.31
+Neigh   | 0.20415    | 0.20436    | 0.2045     |   0.0 |  3.39
+Comm    | 0.11068    | 0.11238    | 0.11477    |   0.4 |  1.86
+Output  | 0.035968   | 0.038635   | 0.041142   |   1.0 |  0.64
+Modify  | 0.12215    | 0.12249    | 0.12266    |   0.1 |  2.03
+Other   |            | 0.01349    |            |       |  0.22
 
-Nlocal:    263.25 ave 278 max 257 min
-Histogram: 3 0 0 0 0 0 0 0 0 1
-Nghost:    7490 ave 7527 max 7446 min
-Histogram: 1 0 0 0 1 0 0 1 0 1
-Neighs:    160501 ave 172241 max 154353 min
-Histogram: 1 1 1 0 0 0 0 0 0 1
+Nlocal:    263.25 ave 274 max 252 min
+Histogram: 1 0 0 1 0 0 0 1 0 1
+Nghost:    7479.5 ave 7521 max 7434 min
+Histogram: 1 0 1 0 0 0 0 0 1 1
+Neighs:    160474 ave 169933 max 149166 min
+Histogram: 1 0 0 1 0 0 0 1 0 1
 
-Total # of neighbors = 642004
-Ave neighs/atom = 609.69
+Total # of neighbors = 641898
+Ave neighs/atom = 609.59
 Ave special neighs/atom = 2.47863
 Neighbor list builds = 42
 Dangerous builds = 0
+
+fix myaf1 oxygen_end1 addforce ${f0} 0 0
+fix myaf1 oxygen_end1 addforce 2 0 0
+fix myaf2 oxygen_end2 addforce -${f0} 0 0
+fix myaf2 oxygen_end2 addforce -2 0 0
+
+run 20000
+PPPM initialization ...
+  extracting TIP4P info from pair style
+  using 12-bit tables for long-range coulomb (src/kspace.cpp:323)
+  G vector (1/distance) = 0.227555
+  grid = 16 9 9
+  stencil order = 5
+  estimated absolute RMS force accuracy = 0.0258192
+  estimated relative force accuracy = 7.77538e-05
+  using double precision FFTW3
+  3d grid and FFT values/proc = 2304 432
+Per MPI rank memory allocation (min/avg/max) = 13.9 | 13.95 | 14.09 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+    1000    317.21009   -3131.6423    81.794894   -2366.2198    513.72159 
+   10000    315.07232   -3135.2134    99.326775   -2356.8662   -105.52443 
+   20000    299.15936   -3150.6399    88.325051   -2417.5888    511.12368 
+   21000    311.68184   -3131.2491    106.21764    -2353.318    258.28873 
+Loop time of 127.351 on 4 procs for 20000 steps with 1053 atoms
+
+Performance: 13.569 ns/day, 1.769 hours/ns, 157.047 timesteps/s
+99.1% CPU use with 4 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 99.26      | 100.96     | 102.36     |  13.1 | 79.27
+Bond    | 0.022747   | 0.1263     | 0.24736    |  28.8 |  0.10
+Kspace  | 14.506     | 16.007     | 17.845     |  33.7 | 12.57
+Neigh   | 4.2657     | 4.2681     | 4.2702     |   0.1 |  3.35
+Comm    | 2.253      | 2.313      | 2.3705     |   2.9 |  1.82
+Output  | 0.87135    | 0.92944    | 0.98463    |   4.4 |  0.73
+Modify  | 2.4666     | 2.4723     | 2.4766     |   0.2 |  1.94
+Other   |            | 0.2774     |            |       |  0.22
+
+Nlocal:    263.25 ave 274 max 249 min
+Histogram: 1 0 0 0 0 1 0 1 0 1
+Nghost:    7461.25 ave 7513 max 7413 min
+Histogram: 1 0 0 1 0 0 1 0 0 1
+Neighs:    160457 ave 165980 max 152252 min
+Histogram: 1 0 0 0 1 0 0 0 0 2
+
+Total # of neighbors = 641827
+Ave neighs/atom = 609.522
+Ave special neighs/atom = 2.47863
+Neighbor list builds = 827
+Dangerous builds = 0
+Total wall time: 0:02:13

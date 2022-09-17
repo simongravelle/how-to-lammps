@@ -19,6 +19,8 @@ special_bonds lj 0.0 0.0 0.5
 read_data ../mergePEGH2O/mix.data
 include ../PARM.lammps
 
+displace_atoms all move 0 2.5 0 units box
+
 group H2O type 1 2
 group PEG type 3 4 5 6 7
 group oxygen_end1 id 65
