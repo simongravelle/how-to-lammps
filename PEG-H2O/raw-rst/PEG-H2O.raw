@@ -250,6 +250,10 @@ the NPT ensemble:
 
 # jump
 
+Water molecules that are overlapping must be deleted. The value of 2 Angstroms is 
+fixed arbitrary, and can be chosen through trial and error. The `mol yes`
+option ensures that full molecule are deleted. 
+
 .. code-block:: python
 
 #space fix myshk H2O shake 1.0e-4 200 0 b 1 a 1
