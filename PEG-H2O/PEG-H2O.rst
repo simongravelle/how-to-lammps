@@ -11,7 +11,7 @@ inspired from this `article`_ by Liese et al.
 The input files are described here. They are also available, together with all
 required data and parameter files in this `folder`_.
 
-.. _folder: PEG-H2O/files/
+.. _folder: files/
 
 Creating a box of water
 -----------------------
