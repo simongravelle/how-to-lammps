@@ -265,15 +265,22 @@ and entropic contribution from both water and PEG molecules.
 
      group H2O type 1 2
      group PEG type 3 4 5 6 7
-     group pull type 6
      group oxygen_end1 id 65
      group oxygen_end2 id 4
 
 
+*Comment -* The two oxygen atoms located respectively at the two PEG ends
+are selected and placed in groups on which the force will be applied.
+
 .. code-block:: python
 
      dump mydmp all atom 200 dump.lammpstrj
+     # write_dump all atom dump.lammpstrj
+# space # dump myxtc xtc atom 200 dump.xtc
 
+
+*Comment -* To generate smaller dump files in compressed xtc format,
+comment the mydmp line and uncomment both the write_dump and myxtc lines.
 
 .. code-block:: python
 
