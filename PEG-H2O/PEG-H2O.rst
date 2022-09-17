@@ -4,7 +4,7 @@ Pulling a PEG molecule in water
 Here a single PEG molecule is immersed in water, and forces are applied to its
 ends in order to extend it, as seen in this `video`_.
 
-.. _video https://youtu.be/05DgPNfjReY
+.. _video: https://youtu.be/05DgPNfjReY
 
 Creating a box of water
 -----------------------
