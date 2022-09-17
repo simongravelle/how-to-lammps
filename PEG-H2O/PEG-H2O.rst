@@ -2,9 +2,16 @@ Pulling a PEG molecule in water
 ===============================
 
 Here a single PEG molecule is immersed in water, and forces are applied to its
-ends in order to extend it, as seen in this `video`_.
+ends in order to extend it, as seen in this `video`_. This simulation was
+inspired from this `article`_ by Liese et al.
 
 .. _video: https://youtu.be/05DgPNfjReY
+.. _article: https://doi.org/10.1021/acsnano.6b07071
+
+The input files are described here. They are also available, together with all
+required data and parameter files in this `folder`_.
+
+.. _folder: PEG-H2O/files/
 
 Creating a box of water
 -----------------------
