@@ -365,7 +365,7 @@ This is useful for generating higher resolution trajectories.
 
 # jump
 
-*Comment - The distance between the two ends are here extracted directly using
+*Comment -* The distance between the two ends are here extracted directly using
 the LAMMPS internal commands, but the same information can also be extracted
 from the dump file after the simulation is over.  
 
@@ -375,7 +375,7 @@ from the dump file after the simulation is over.
 
 # jump
 
-*Comment - First run
+*Comment -* First run
 
 .. code-block:: python
 
@@ -388,4 +388,4 @@ from the dump file after the simulation is over.
 
 #space run 200000
 
-*Comment - The forcing is applied only during the second part of the run.
+*Comment -* The forcing is applied only during the second part of the run.

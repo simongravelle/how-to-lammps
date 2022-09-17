@@ -330,7 +330,7 @@ This is useful for generating higher resolution trajectories.
      thermo 10000
 
 
-*Comment - The distance between the two ends are here extracted directly using
+*Comment -* The distance between the two ends are here extracted directly using
 the LAMMPS internal commands, but the same information can also be extracted
 from the dump file after the simulation is over.
 
@@ -339,7 +339,7 @@ from the dump file after the simulation is over.
      run 100000
 
 
-*Comment - First run
+*Comment -* First run
 
 .. code-block:: python
 
@@ -351,4 +351,4 @@ from the dump file after the simulation is over.
 
      run 200000
 
-*Comment - The forcing is applied only during the second part of the run.
+*Comment -* The forcing is applied only during the second part of the run.
