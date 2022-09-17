@@ -19,7 +19,7 @@ include ../PARM.lammps
 
 group PEG type 3 4 5 6 7
 
-dump mydmp all atom 10 dump.lammpstrj
+dump mydmp all atom 10 dump.eq.lammpstrj
 thermo 1
 
 minimize 1.0e-4 1.0e-6 100 1000
@@ -32,9 +32,7 @@ fix myber all temp/berendsen 300 300 100
 dump mydmp all atom 1000 dump.lammpstrj
 thermo 1000
 variable mytemp equal temp
-variable myvol equal vol
 fix myat1 all ave/time 10 10 100 v_mytemp file temperature.dat
-fix myat2 all ave/time 10 10 100 v_myvol file volume.dat
 
 timestep 1
 run 10000

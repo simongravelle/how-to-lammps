@@ -40,8 +40,8 @@ read_data ../mergePEGH2O/mix.data
   6 = max # of 1-3 neighbors
   12 = max # of 1-4 neighbors
   14 = max # of special neighbors
-  special bonds CPU = 0.000318748 secs
-  read_data CPU = 0.00817032 secs
+  special bonds CPU = 0.00031521 secs
+  read_data CPU = 0.00694095 secs
 include ../PARM.lammps
 # Mass
 
@@ -103,18 +103,19 @@ dihedral_coeff	13 0.16 2 0 0
 dihedral_coeff	14 1.01 3 0 0
 
 
+displace_atoms all move 0 2.5 0 units box
+
 group H2O type 1 2
 987 atoms in group H2O
 group PEG type 3 4 5 6 7
 66 atoms in group PEG
-group pull type 6
-2 atoms in group pull
 group oxygen_end1 id 65
 1 atoms in group oxygen_end1
 group oxygen_end2 id 4
 1 atoms in group oxygen_end2
 
 dump mydmp all atom 200 dump.lammpstrj
+# write_dump all atom dump.lammpstrj
 
 timestep 1
 fix myshk H2O shake 1.0e-4 200 0 b 1 a 1
@@ -122,7 +123,7 @@ fix myshk H2O shake 1.0e-4 200 0 b 1 a 1
   0 = # of size 3 clusters
   0 = # of size 4 clusters
   329 = # of frozen angles
-  find clusters CPU = 0.000208708 secs
+  find clusters CPU = 0.000195311 secs
 fix mynvt all nvt temp 300 300 100
 fix myrct PEG recenter INIT INIT INIT
 
@@ -150,5 +151,4 @@ Neighbor list info ...
   max neighbors/atom: 2000, page size: 100000
   master list distance cutoff = 14.3092
   ghost atom cutoff = 14.3092
-  binsize = 7.1546, bins = 6 3 3
-  1 neighbor lis
+  binsize 

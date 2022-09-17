@@ -24,13 +24,13 @@ group PEG type 3 4 5 6 7
 group oxygen_end1 id 65
 group oxygen_end2 id 4
 
-dump mydmp all atom 200 dump.lammpstrj
+dump mydmp all atom 1000 dump.lammpstrj
 # write_dump all atom dump.lammpstrj
+# dump myxtc xtc atom 1000 dump.xtc
 
 timestep 1
 fix myshk H2O shake 1.0e-4 200 0 b 1 a 1
 fix mynvt all nvt temp 300 300 100
-fix myrct PEG recenter INIT INIT INIT
 
 variable mytemp equal temp
 fix myat1 all ave/time 10 10 100 v_mytemp file temperature.dat

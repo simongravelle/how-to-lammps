@@ -94,8 +94,16 @@ which is what we want here.
 Creating a single PEG in vacuum
 -------------------------------
 
+The initial structure of the PEG molecule is extremely out-of equilibrium,
+with all the atom placed in the same plane. 
+
+.. image:: files/singlePEG/singlePEG.webp
+   :width: 600
+   :alt: PEG molecule in vacuum.
+
 Anticipating the future merge, the box size is set to be 
-equal to the final water box. 
+equal to the final water box (set in the Python script 
+generating the PEG molecule).
 
 .. code-block:: python
 
@@ -114,6 +122,9 @@ equal to the final water box.
 
 #space special_bonds lj 0.0 0.0 0.5
 
+*Comment -* The special_bonds command cancels the interactions between the
+closest atoms of the molecule.
+
 # jump
 
 .. code-block:: python
@@ -131,7 +142,7 @@ equal to the final water box.
 
 .. code-block:: python
 
-#space dump mydmp all atom 10 dump.lammpstrj
+#space dump mydmp all atom 10 dump.eq.lammpstrj
 #space thermo 1
 
 # jump
@@ -144,10 +155,18 @@ equal to the final water box.
 
 # jump
 
+*Comment -* Minimisation of energy is required as the initial 
+configuration of the PEG molecule is far from an equilibrium value.
+In addition, the high resolution dump command is cancelled at 
+the end of the minimisation, and a new lower resolution dump is created below.
+
 .. code-block:: python
 
 #space fix mynve all nve
 #space fix myber all temp/berendsen 300 300 100
+
+*Comment -* The PEG is equilibrated in the NVT ensemble. No box relaxation 
+is required as the PEG is in vacuum. 
 
 # jump
 
@@ -156,9 +175,7 @@ equal to the final water box.
 #space dump mydmp all atom 1000 dump.lammpstrj
 #space thermo 1000
 #space variable mytemp equal temp
-#space variable myvol equal vol
 #space fix myat1 all ave/time 10 10 100 v_mytemp file temperature.dat
-#space fix myat2 all ave/time 10 10 100 v_myvol file volume.dat
 
 # jump
 
@@ -292,6 +309,8 @@ and entropic contribution from both water and PEG molecules.
 
 # jump
 
+*Comment -* Simulation starts from the equilibrated PEG+water system.
+
 .. code-block:: python
 
 #space group H2O type 1 2
@@ -306,21 +325,21 @@ are selected and placed in groups on which the force will be applied.
 
 .. code-block:: python
 
-#space dump mydmp all atom 200 dump.lammpstrj
+#space dump mydmp all atom 1000 dump.lammpstrj
 #space # write_dump all atom dump.lammpstrj
-# space # dump myxtc xtc atom 200 dump.xtc
+#space # dump myxtc xtc atom 1000 dump.xtc
 
 # jump
 
 *Comment -* To generate smaller dump files in compressed xtc format, 
 comment the mydmp line and uncomment both the write_dump and myxtc lines.
+This is useful for generating higher resolution trajectories.
 
 .. code-block:: python
 
 #space timestep 1
 #space fix myshk H2O shake 1.0e-4 200 0 b 1 a 1
 #space fix mynvt all nvt temp 300 300 100
-#space fix myrct PEG recenter INIT INIT INIT
 
 # jump
 
@@ -336,11 +355,17 @@ comment the mydmp line and uncomment both the write_dump and myxtc lines.
 
 # jump
 
+*Comment - The distance between the two ends are here extracted directly using
+the LAMMPS internal commands, but the same information can also be extracted
+from the dump file after the simulation is over.  
+
 .. code-block:: python
 
 #space run 100000
 
 # jump
+
+*Comment - First run
 
 .. code-block:: python
 
@@ -352,3 +377,5 @@ comment the mydmp line and uncomment both the write_dump and myxtc lines.
 .. code-block:: python
 
 #space run 200000
+
+*Comment - The forcing is applied only during the second part of the run.

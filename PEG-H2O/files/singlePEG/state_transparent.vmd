@@ -241,7 +241,7 @@ proc vmdrestoremymaterials {} {
   material change specular mytransparent 0.500000
   material change shininess mytransparent 0.534020
   material change mirror mytransparent 0.000000
-  material change opacity mytransparent 0.300000
+  material change opacity mytransparent 0.200000
   material change outline mytransparent 0.000000
   material change outlinewidth mytransparent 0.000000
   material change transmode mytransparent 0.000000
@@ -371,7 +371,7 @@ mol new dump.lammpstrj type lammpstrj first 0 last -1 step 1 filebonds 1 autobon
 mol delrep 0 top
 mol representation DynamicBonds 1.000000 0.300000 12.000000
 mol color Name
-mol selection {type 1 2}
+mol selection {type 1 2 and within 3 of type 3 4 5 6 7}
 mol material myOpaque2
 mol addrep top
 mol selupdate 0 top 0
@@ -403,6 +403,7 @@ mol clipplane center 5 0 top {0.0 0.0 0.0}
 mol clipplane color  5 0 top {0.5 0.5 0.5 }
 mol clipplane normal 5 0 top {0.0 0.0 1.0}
 mol clipplane status 5 0 top {0}
+mol showrep top 0 0
 mol representation VDW 0.200000 37.000000
 mol color Name
 mol selection {type 3 4 6}
@@ -541,7 +542,7 @@ mol clipplane normal 5 4 top {0.0 0.0 1.0}
 mol clipplane status 5 4 top {0}
 mol representation VDW 0.200000 37.000000
 mol color Name
-mol selection {type 1 2}
+mol selection {type 1 2 and within 3 of type 3 4 5 6 7}
 mol material myOpaque2
 mol addrep top
 mol selupdate 5 top 0
@@ -573,6 +574,7 @@ mol clipplane center 5 5 top {0.0 0.0 0.0}
 mol clipplane color  5 5 top {0.5 0.5 0.5 }
 mol clipplane normal 5 5 top {0.0 0.0 1.0}
 mol clipplane status 5 5 top {0}
+mol showrep top 5 0
 mol representation VDW 0.200000 37.000000
 mol color Name
 mol selection {type 5 7}
@@ -607,8 +609,42 @@ mol clipplane center 5 6 top {0.0 0.0 0.0}
 mol clipplane color  5 6 top {0.5 0.5 0.5 }
 mol clipplane normal 5 6 top {0.0 0.0 1.0}
 mol clipplane status 5 6 top {0}
+mol representation QuickSurf 1.300000 1.926270 0.650000 3.000000
+mol color Name
+mol selection {type 1 3 4 5 6 7 }
+mol material mytransparent
+mol addrep top
+mol selupdate 7 top 0
+mol colupdate 7 top 0
+mol scaleminmax top 7 0.000000 0.000000
+mol smoothrep top 7 0
+mol drawframes top 7 {now}
+mol clipplane center 0 7 top {0.0 0.0 0.0}
+mol clipplane color  0 7 top {0.5 0.5 0.5 }
+mol clipplane normal 0 7 top {0.0 0.0 1.0}
+mol clipplane status 0 7 top {0}
+mol clipplane center 1 7 top {0.0 0.0 0.0}
+mol clipplane color  1 7 top {0.5 0.5 0.5 }
+mol clipplane normal 1 7 top {0.0 0.0 1.0}
+mol clipplane status 1 7 top {0}
+mol clipplane center 2 7 top {0.0 0.0 0.0}
+mol clipplane color  2 7 top {0.5 0.5 0.5 }
+mol clipplane normal 2 7 top {0.0 0.0 1.0}
+mol clipplane status 2 7 top {0}
+mol clipplane center 3 7 top {0.0 0.0 0.0}
+mol clipplane color  3 7 top {0.5 0.5 0.5 }
+mol clipplane normal 3 7 top {0.0 0.0 1.0}
+mol clipplane status 3 7 top {0}
+mol clipplane center 4 7 top {0.0 0.0 0.0}
+mol clipplane color  4 7 top {0.5 0.5 0.5 }
+mol clipplane normal 4 7 top {0.0 0.0 1.0}
+mol clipplane status 4 7 top {0}
+mol clipplane center 5 7 top {0.0 0.0 0.0}
+mol clipplane color  5 7 top {0.5 0.5 0.5 }
+mol clipplane normal 5 7 top {0.0 0.0 1.0}
+mol clipplane status 5 7 top {0}
 mol rename top dump.lammpstrj
-set viewpoints([molinfo top]) {{{1 0 0 0.163713} {0 1 0 0.0714082} {0 0 1 -0.0503279} {0 0 0 1}} {{1 0 0 0} {0 1 0 0} {0 0 1 0} {0 0 0 1}} {{0.159769 0 0 0} {0 0.159769 0 0} {0 0 0.159769 0} {0 0 0 1}} {{1 0 0 0} {0 1 0 0} {0 0 1 0} {0 0 0 1}}}
+set viewpoints([molinfo top]) {{{1 0 0 -0.0596896} {0 1 0 -0.0919277} {0 0 1 -0.0867952} {0 0 0 1}} {{1 0 0 0} {0 1 0 0} {0 0 1 0} {0 0 0 1}} {{0.133423 0 0 0} {0 0.133423 0 0} {0 0 0.133423 0} {0 0 0 1}} {{1 0 0 0} {0 1 0 0} {0 0 1 0} {0 0 0 1}}}
 lappend viewplist [molinfo top]
 set topmol [molinfo top]
 # done with molecule 1
