@@ -4,7 +4,7 @@
 # My Github account: https://github.com/simongravelle/
 # LAMMPS tutorials for beginners: https://lammpstutorials.github.io/
 
-variable f0 equal 1 # kcal/mol/A # 1 kcal/mol/A = 67.2 pN
+variable f0 equal 2 # kcal/mol/A # 1 kcal/mol/A = 67.2 pN
 
 units real
 atom_style full
@@ -19,13 +19,15 @@ special_bonds lj 0.0 0.0 0.5
 read_data ../mergePEGH2O/mix.data
 include ../PARM.lammps
 
+displace_atoms all move 0 2.5 0 units box
+
 group H2O type 1 2
 group PEG type 3 4 5 6 7
 group pull type 6
 group oxygen_end1 id 65
 group oxygen_end2 id 4
 
-dump mydmp all atom 200 dump.lammpstrj
+dump mydmp all atom 1000 dump.lammpstrj
 
 timestep 1
 fix myshk H2O shake 1.0e-4 200 0 b 1 a 1
@@ -33,16 +35,16 @@ fix mynvt all nvt temp 300 300 100
 fix myrct PEG recenter INIT INIT INIT
 
 variable mytemp equal temp
-fix myat1 all ave/time 10 10 100 v_mytemp file temperature.dat
+#fix myat1 all ave/time 10 10 100 v_mytemp file temperature.dat
 variable x1 equal xcm(oxygen_end1,x)
 variable x2 equal xcm(oxygen_end2,x)
 variable delta_x equal abs(v_x1-v_x2)
-fix myat2 all ave/time 10 10 100 v_delta_x file end-to-end-distance.dat
+#fix myat2 all ave/time 10 10 100 v_delta_x file end-to-end-distance.dat
 thermo 10000
 
-run 100000
+run 50000
 
 fix myaf1 oxygen_end1 addforce ${f0} 0 0
 fix myaf2 oxygen_end2 addforce -${f0} 0 0
 
-run 200000
+run 100000

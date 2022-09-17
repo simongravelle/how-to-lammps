@@ -5,7 +5,7 @@ LAMMPS (20 Nov 2019)
 # My Github account: https://github.com/simongravelle/
 # LAMMPS tutorials for beginners: https://lammpstutorials.github.io/
 
-variable f0 equal 1 # kcal/mol/A # 1 kcal/mol/A = 67.2 pN
+variable f0 equal 2 # kcal/mol/A # 1 kcal/mol/A = 67.2 pN
 
 units real
 atom_style full
@@ -40,8 +40,8 @@ read_data ../mergePEGH2O/mix.data
   6 = max # of 1-3 neighbors
   12 = max # of 1-4 neighbors
   14 = max # of special neighbors
-  special bonds CPU = 0.000377668 secs
-  read_data CPU = 0.00791891 secs
+  special bonds CPU = 0.000296561 secs
+  read_data CPU = 0.00700056 secs
 include ../PARM.lammps
 # Mass
 
@@ -103,6 +103,8 @@ dihedral_coeff	13 0.16 2 0 0
 dihedral_coeff	14 1.01 3 0 0
 
 
+displace_atoms all move 0 2.5 0 units box
+
 group H2O type 1 2
 987 atoms in group H2O
 group PEG type 3 4 5 6 7
@@ -114,7 +116,7 @@ group oxygen_end1 id 65
 group oxygen_end2 id 4
 1 atoms in group oxygen_end2
 
-dump mydmp all atom 400 dump.lammpstrj
+dump mydmp all atom 1000 dump.lammpstrj
 
 timestep 1
 fix myshk H2O shake 1.0e-4 200 0 b 1 a 1
@@ -122,19 +124,19 @@ fix myshk H2O shake 1.0e-4 200 0 b 1 a 1
   0 = # of size 3 clusters
   0 = # of size 4 clusters
   329 = # of frozen angles
-  find clusters CPU = 0.000243647 secs
+  find clusters CPU = 0.000186144 secs
 fix mynvt all nvt temp 300 300 100
 fix myrct PEG recenter INIT INIT INIT
 
 variable mytemp equal temp
-fix myat1 all ave/time 10 10 100 v_mytemp file temperature.dat
+#fix myat1 all ave/time 10 10 100 v_mytemp file temperature.dat
 variable x1 equal xcm(oxygen_end1,x)
 variable x2 equal xcm(oxygen_end2,x)
 variable delta_x equal abs(v_x1-v_x2)
-fix myat2 all ave/time 10 10 100 v_delta_x file end-to-end-distance.dat
+#fix myat2 all ave/time 10 10 100 v_delta_x file end-to-end-distance.dat
 thermo 10000
 
-run 100000
+run 50000
 PPPM initialization ...
   extracting TIP4P info from pair style
   using 12-bit tables for long-range coulomb (src/kspace.cpp:323)
@@ -159,43 +161,38 @@ Neighbor list info ...
       bin: standard
 Per MPI rank memory allocation (min/avg/max) = 13.9 | 13.95 | 14.09 Mbytes
 Step Temp E_pair E_mol TotEng Press 
-       0    303.02824   -3171.4329    89.633856   -2428.7351   -696.00388 
-   10000    302.45481   -3137.2643    85.011073   -2400.4251    476.89669 
-   20000    291.14667   -3187.0074    87.361905   -2472.1878    1818.1124 
-   30000    316.27408   -3117.6168    84.805415    -2351.201    745.93204 
-   40000    296.99524   -3101.8701    90.933965   -2370.8741    363.03549 
-   50000    283.36298   -3259.7891    100.85916   -2548.2471   -558.50677 
-   60000    296.09429   -3171.1894    90.832703   -2442.2363   -379.42172 
-   70000    296.89652   -3164.7356    86.910831   -2437.9755    -121.2066 
-   80000    275.17435   -3192.5713    91.020312   -2508.5157   -491.99618 
-   90000    313.11448   -3187.7532     99.36042   -2413.5917   -133.64692 
-  100000     318.8029   -3221.0812    95.291941    -2438.729    1003.5359 
-Loop time of 600.538 on 4 procs for 100000 steps with 1053 atoms
+       0    303.02824    -3171.435    89.633856   -2428.7372   -696.02535 
+   10000    305.84277   -3204.1606    82.121197   -2462.9098    1793.4671 
+   20000    298.97532   -3215.2586    92.022478   -2478.9067    117.82005 
+   30000    299.36279   -3176.1654    96.892977    -2434.108    91.521613 
+   40000    307.11129   -3224.4305    80.878747   -2481.6883    556.77582 
+   50000     296.7831   -3125.7756    93.410329   -2392.7604    432.67123 
+Loop time of 331.745 on 4 procs for 50000 steps with 1053 atoms
 
-Performance: 14.387 ns/day, 1.668 hours/ns, 166.517 timesteps/s
-99.3% CPU use with 4 MPI tasks x no OpenMP threads
+Performance: 13.022 ns/day, 1.843 hours/ns, 150.718 timesteps/s
+98.4% CPU use with 4 MPI tasks x no OpenMP threads
 
 MPI task timing breakdown:
 Section |  min time  |  avg time  |  max time  |%varavg| %total
 ---------------------------------------------------------------
-Pair    | 466.04     | 484.35     | 504.65     |  62.3 | 80.65
-Bond    | 0.12547    | 0.62262    | 1.4215     |  68.6 |  0.10
-Kspace  | 49.109     | 70.336     | 89.23      | 170.1 | 11.71
-Neigh   | 20.378     | 20.388     | 20.399     |   0.2 |  3.39
-Comm    | 10.784     | 10.922     | 11.045     |   3.4 |  1.82
-Output  | 0.088483   | 0.095137   | 0.10043    |   1.5 |  0.02
-Modify  | 12.63      | 12.66      | 12.691     |   0.6 |  2.11
-Other   |            | 1.167      |            |       |  0.19
+Pair    | 242.71     | 256.13     | 273        |  68.2 | 77.21
+Bond    | 0.055687   | 0.31719    | 0.71292    |  48.9 |  0.10
+Kspace  | 33.729     | 50.9       | 64.601     | 155.5 | 15.34
+Neigh   | 11.316     | 11.327     | 11.334     |   0.2 |  3.41
+Comm    | 5.9614     | 6.0505     | 6.1746     |   3.2 |  1.82
+Output  | 0.020115   | 0.02151    | 0.022921   |   0.7 |  0.01
+Modify  | 6.3622     | 6.3831     | 6.4042     |   0.7 |  1.92
+Other   |            | 0.611      |            |       |  0.18
 
-Nlocal:    263.25 ave 274 max 252 min
-Histogram: 1 0 0 0 1 0 1 0 0 1
-Nghost:    7433 ave 7486 max 7373 min
-Histogram: 1 0 0 1 0 0 0 1 0 1
-Neighs:    160429 ave 170075 max 150351 min
-Histogram: 1 0 0 0 1 1 0 0 0 1
+Nlocal:    263.25 ave 276 max 255 min
+Histogram: 1 1 0 1 0 0 0 0 0 1
+Nghost:    7473.5 ave 7543 max 7410 min
+Histogram: 1 0 1 0 0 0 1 0 0 1
+Neighs:    160511 ave 172234 max 151974 min
+Histogram: 1 0 0 2 0 0 0 0 0 1
 
-Total # of neighbors = 641716
-Ave neighs/atom = 609.417
+Total # of neighbors = 642043
+Ave neighs/atom = 609.727
 Ave special neighs/atom = 2.47863
-Neighbor list builds = 4123
+Neighbor list builds = 2056
 Dangerous builds = 0

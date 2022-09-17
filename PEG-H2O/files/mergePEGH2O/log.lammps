@@ -38,8 +38,8 @@ read_data ../singlePEG/PEG.data
   6 = max # of 1-3 neighbors
   12 = max # of 1-4 neighbors
   14 = max # of special neighbors
-  special bonds CPU = 0.000179183 secs
-  read_data CPU = 0.00525408 secs
+  special bonds CPU = 0.000227605 secs
+  read_data CPU = 0.00738668 secs
 read_data ../pureH2O/H2O.data add append
   orthogonal box = (-21.662 -8.12315 -8.12315) to (21.662 8.12315 8.12315)
   4 by 1 by 1 MPI processor grid
@@ -59,8 +59,8 @@ read_data ../pureH2O/H2O.data add append
   6 = max # of 1-3 neighbors
   12 = max # of 1-4 neighbors
   14 = max # of special neighbors
-  special bonds CPU = 0.000366282 secs
-  read_data CPU = 0.00832548 secs
+  special bonds CPU = 0.000305114 secs
+  read_data CPU = 0.00751452 secs
 include ../PARM.lammps
 # Mass
 
@@ -166,11 +166,11 @@ fix myshk H2O shake 1.0e-4 200 0 b 1 a 1
   0 = # of size 3 clusters
   0 = # of size 4 clusters
   329 = # of frozen angles
-  find clusters CPU = 0.000400563 secs
+  find clusters CPU = 0.000246442 secs
 fix mynpt all npt temp 300 300 100 x 1 1 1000
 timestep 1.0
 
-dump mydmp all atom 25 dump.lammpstrj
+dump mydmp all atom 20 dump.lammpstrj
 thermo 100
 variable mytemp equal temp
 variable myvol equal vol
@@ -303,22 +303,22 @@ Step Temp E_pair E_mol TotEng Press Volume
     9800    285.90318   -3170.1076    81.049045   -2472.9012     320.4766    10611.765 
     9900     306.3167   -3191.6847    81.228195   -2450.3055    306.17041    10603.169 
    10000    303.02824   -3171.3961    89.633856   -2428.6983   -688.17149    10596.859 
-Loop time of 79.2125 on 4 procs for 10000 steps with 1053 atoms
+Loop time of 83.5509 on 4 procs for 10000 steps with 1053 atoms
 
-Performance: 10.907 ns/day, 2.200 hours/ns, 126.243 timesteps/s
-99.5% CPU use with 4 MPI tasks x no OpenMP threads
+Performance: 10.341 ns/day, 2.321 hours/ns, 119.687 timesteps/s
+99.6% CPU use with 4 MPI tasks x no OpenMP threads
 
 MPI task timing breakdown:
 Section |  min time  |  avg time  |  max time  |%varavg| %total
 ---------------------------------------------------------------
-Pair    | 66.023     | 66.548     | 66.785     |   3.7 | 84.01
-Bond    | 0.016335   | 0.07353    | 0.1664     |  23.0 |  0.09
-Kspace  | 7.0722     | 7.3975     | 7.9739     |  12.7 |  9.34
-Neigh   | 1.9563     | 1.9568     | 1.957      |   0.0 |  2.47
-Comm    | 0.98258    | 1.0554     | 1.0924     |   4.2 |  1.33
-Output  | 0.14365    | 0.1506     | 0.15584    |   1.2 |  0.19
-Modify  | 1.7389     | 1.8202     | 1.9839     |   7.1 |  2.30
-Other   |            | 0.2102     |            |       |  0.27
+Pair    | 67.559     | 68.773     | 70.361     |  13.2 | 82.31
+Bond    | 0.016316   | 0.075559   | 0.16887    |  23.1 |  0.09
+Kspace  | 7.6347     | 9.1662     | 10.363     |  36.1 | 10.97
+Neigh   | 2.0898     | 2.0906     | 2.0924     |   0.1 |  2.50
+Comm    | 1.0598     | 1.1276     | 1.1647     |   3.8 |  1.35
+Output  | 0.20015    | 0.20968    | 0.21735    |   1.4 |  0.25
+Modify  | 1.7975     | 1.8836     | 2.0525     |   7.2 |  2.25
+Other   |            | 0.2247     |            |       |  0.27
 
 Nlocal:    263.25 ave 271 max 256 min
 Histogram: 2 0 0 0 0 0 0 0 1 1
@@ -343,4 +343,4 @@ PPPM initialization ...
   estimated relative force accuracy = 7.77538e-05
   using double precision FFTW3
   3d grid and FFT values/proc = 2304 432
-Total wall time: 0:01:19
+Total wall time: 0:01:23

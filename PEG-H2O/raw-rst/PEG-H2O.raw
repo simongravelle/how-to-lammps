@@ -247,7 +247,7 @@ Pulling on the PEG
 
 # folder pullonPEG file input.lammps
 
-#space variable f0 equal 1 # kcal/mol/A # 1 kcal/mol/A = 67.2 pN
+#space variable f0 equal 2 # kcal/mol/A # 1 kcal/mol/A = 67.2 pN
 
 # jump
 
