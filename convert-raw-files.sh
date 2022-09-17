@@ -49,12 +49,18 @@ do
                 # add to lammps input file
                 echo $newline >> $inputname
                 # write rst file
-                echo '   '$newline >> $newrst
+                echo '    '$newline >> $newrst
             elif [[ $line = "# jump" ]]; 
             then
                 # add a blank line to lammps input file
                 echo "" >> $inputname
             elif [[ $line = *":width:"* ]]; 
+            then
+                echo '    '$line >> $newrst
+            elif [[ $line = *":align:"* ]]; 
+            then
+                echo '    '$line >> $newrst
+            elif [[ $line = *":alt:"* ]]; 
             then
                 echo '    '$line >> $newrst
             else
