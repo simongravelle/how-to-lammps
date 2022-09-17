@@ -2,7 +2,7 @@ Pulling a PEG molecule in water
 ===============================
 
 Here a single PEG molecule is immersed in water, and forces are applied to its
-ends in order to extend it.
+ends in order to extend it, as seen in this [video](https://youtu.be/05DgPNfjReY).
 
 Creating a box of water
 -----------------------
@@ -87,7 +87,8 @@ Creating a single PEG in vacuum
 -------------------------------
 
 The initial structure of the PEG molecule is extremely out-of equilibrium,
-with all the atom placed in the same plane.
+with all the atom placed in the same plane. An energy minimisation is required,
+followed by a short NVT equilibration.
 
 .. image:: files/singlePEG/singlePEG.webp
      :width: 600
