@@ -1,4 +1,4 @@
-# LAMMPS input script with comments
+# How-to LAMMPS
 
 ## [PEG molecule pulled in water](PEG-H2O/PEG-H2O.rst)
 
