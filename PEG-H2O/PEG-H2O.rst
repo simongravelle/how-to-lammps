@@ -13,6 +13,9 @@ and pressure in the NPT ensemble.
 
 .. image:: files/pureH2O/water.webp
      :width: 600
+:align: center
+
+Water molecules being equilibrated in the NPT ensemble.
 
 .. code-block:: python
 
@@ -157,7 +160,7 @@ Solvating the PEG in water
 
 .. image:: files/mergePEGH2O/solvatedPEG.webp
      :width: 600
-:alt: PEG molecule being solvated in water
+:align: center
 
 Video shows the PEG molecule in water. The system is equilibrated in
 the NPT ensemble.
