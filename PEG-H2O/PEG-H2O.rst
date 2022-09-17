@@ -253,7 +253,7 @@ Pulling on the PEG
 
 Video showing the PEG molecule being pulled in water.
 
-.. image:: files/pullonPEG/pulledPEG.webp
+.. image:: files/pullonPEG/pullonPEG.webp
      :width: 600
      :alt: PEG molecule being pulled in water.
 
