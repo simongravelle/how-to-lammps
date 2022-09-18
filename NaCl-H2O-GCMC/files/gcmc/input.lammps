@@ -4,7 +4,7 @@
 # My Github account: https://github.com/simongravelle/
 # LAMMPS tutorials for beginners: https://lammpstutorials.github.io/
 
-variable rdm equal 544
+variable rdm equal 544645
 variable pre equal 1
 variable tem equal 297.15
 variable dis index 0.5
@@ -30,7 +30,7 @@ molecule h2omol H2OTip4p.txt
 fix myshk H2O shake 1.0e-4 200 0 b 1 a 1 mol h2omol
 fix mynvt all nvt temp ${tem} ${tem} 100
 fix tether NaCl spring/self 10.0
-fix mygcmc H2O gcmc 50 100 0 0 ${rdm} ${tem} ${mu} ${dis} mol h2omol tfac_insert ${tfac} group H2O shake myshk full_energy
+fix mygcmc H2O gcmc 100 50 0 0 ${rdm} ${tem} ${mu} ${dis} mol h2omol tfac_insert ${tfac} group H2O shake myshk full_energy
 timestep 2.0
 
 dump mydmp all atom 100 dump.lammpstrj

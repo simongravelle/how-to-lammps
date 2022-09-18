@@ -18,13 +18,18 @@ required data and parameter files in this `folder`_.
 
 .. code-block:: python
 
-     variable rdm equal 544
+     variable rdm equal 544645
      variable pre equal 1
      variable tem equal 297.15
      variable dis index 0.5
      variable tfac equal 5.0/3.0
      variable mu equal -12.60
 
+
+The value of the variable mu, which is the imposed chemical potential, can be calibrated
+by performing gcmc simulation in absence of solid (just vapor water). The calibration
+consists in performing simulation for varying value of mu, and measuring the
+equilibrated pressure and water density.
 
 .. code-block:: python
 
@@ -56,8 +61,15 @@ required data and parameter files in this `folder`_.
      fix myshk H2O shake 1.0e-4 200 0 b 1 a 1 mol h2omol
      fix mynvt all nvt temp ${tem} ${tem} 100
      fix tether NaCl spring/self 10.0
-     fix mygcmc H2O gcmc 50 100 0 0 ${rdm} ${tem} ${mu} ${dis} mol h2omol tfac_insert ${tfac} group H2O shake myshk full_energy
+     fix mygcmc H2O gcmc 100 50 0 0 ${rdm} ${tem} ${mu} ${dis} mol h2omol tfac_insert ${tfac} group H2O shake myshk full_energy
      timestep 2.0
+
+Here the NaCl block is maintained into position with spring/self, in order to
+avoid a vertical drift of the whole system.
+
+The first number and second numbers in the gcmc fix (respectively 100 and 50) are
+important, they set the ratio between GCMC attempts and molecular dynamics (MD) moves. Here every
+100 steps, 50 GCMC moves are attempted, and in between those 100 step, MD is performed.
 
 
 .. code-block:: python
@@ -77,3 +89,6 @@ required data and parameter files in this `folder`_.
      fix at3 all ave/time 100 10 1000 v_ins_att v_ins_suc v_del_att v_del_suc file gcmc.dat
      run 50000
      write_data gcmc.data
+
+The system total energy and number of molecule are needed for the calculation of the
+adsorption heat.

@@ -6,4 +6,4 @@ This directory contains advanced LAMMPS input scripts with comments.
 
 ![Image of PEG molecule pulled in water](PEG-H2O/PEGinH2O.png)
 
-### 2) [How to measure surface heat of adsorption][NaClH2O-GCMC/NaCl-H2O-GCMC.rst]
+### 2) [How to measure surface heat of adsorption](NaClH2O-GCMC/NaCl-H2O-GCMC.rst)
