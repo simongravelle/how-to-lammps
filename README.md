@@ -2,6 +2,8 @@
 
 This directory contains advanced LAMMPS input scripts with comments. 
 
-### 1) [PEG molecule pulled in water](PEG-H2O/PEG-H2O.rst)
+### 1) [How to pull a PEG molecule in water](PEG-H2O/PEG-H2O.rst)
 
 ![Image of PEG molecule pulled in water](PEG-H2O/PEGinH2O.png)
+
+### 2) [How to measure surface heat of adsorption][NaClH2O-GCMC/NaCl-H2O-GCMC.rst]

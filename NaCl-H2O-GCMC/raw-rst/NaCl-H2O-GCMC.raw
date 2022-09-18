@@ -1,0 +1,85 @@
+How to measure surface heat of adsorption
+=========================================
+
+Here a thin layer of water is in contact with a NaCl(100) solid surface. 
+Grand canonical Monte Carlo simulation is performed to equilibrate the 
+content in water. 
+
+This simulation was taken from my `article`_ with Alex and Christian.
+
+.. _video: https://youtu.be/05DgPNfjReY
+.. _article: https://doi.org/10.1063/5.0099646
+
+The input file is described here, and is available as well, together with all 
+required data and parameter files in this `folder`_.
+
+.. _folder: files/
+
+
+.. code-block:: python
+
+# folder gcmc file input.lammps
+#space variable rdm equal 544
+#space variable pre equal 1
+#space variable tem equal 297.15
+#space variable dis index 0.5
+#space variable tfac equal 5.0/3.0
+#space variable mu equal -12.60
+
+# jump
+
+.. code-block:: python
+
+#space units real
+#space atom_style full
+#space bond_style harmonic
+#space angle_style harmonic
+#space boundary p p p
+#space pair_style lj/cut/tip4p/long 1 2 1 1 0.105 10.0
+#space kspace_style pppm/tip4p 1.0e-4
+#space pair_modify mix arithmetic tail yes
+
+# jump
+
+.. code-block:: python
+
+#space read_data gcmc.data
+#space include PARM.lammps
+
+# jump
+
+.. code-block:: python
+
+#space group H2O type 1 2
+#space group NaCl type 3 4
+
+# jump
+
+.. code-block:: python
+
+#space molecule h2omol H2OTip4p.txt
+#space fix myshk H2O shake 1.0e-4 200 0 b 1 a 1 mol h2omol 
+#space fix mynvt all nvt temp ${tem} ${tem} 100
+#space fix tether NaCl spring/self 10.0
+#space fix mygcmc H2O gcmc 50 100 0 0 ${rdm} ${tem} ${mu} ${dis} mol h2omol tfac_insert ${tfac} group H2O shake myshk full_energy
+#space timestep 2.0
+
+# jump
+
+.. code-block:: python
+
+#space dump mydmp all atom 100 dump.lammpstrj
+#space thermo 100
+#space variable oxygen atom "type==1"
+#space group oxygen dynamic all var oxygen
+#space variable nO equal count(oxygen)
+#space variable myetot equal etotal
+#space fix at1 all ave/time 100 10 1000 v_nO file numbermolecule.dat
+#space fix at2 all ave/time 100 10 1000 v_myetot file totalenergy.dat
+#space variable ins_att equal f_mygcmc[3]
+#space variable ins_suc equal f_mygcmc[4]
+#space variable del_att equal f_mygcmc[5]
+#space variable del_suc equal f_mygcmc[6]
+#space fix at3 all ave/time 100 10 1000 v_ins_att v_ins_suc v_del_att v_del_suc file gcmc.dat
+#space run 50000
+#space write_data gcmc.data
