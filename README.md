@@ -8,8 +8,16 @@ Equilibration of a single PEG molecule in a water box, followed by the forced st
 
 ![Image of PEG molecule pulled in water](PEG-H2O/PEGinH2O.png)
 
-### [2) How-to measure the heat of adsorption?](NaCl-H2O-GCMC/NaCl-H2O-GCMC.rst)
+### [2) How-to measure heat of adsorption?](NaCl-H2O-GCMC/NaCl-H2O-GCMC.rst)
 
 Grand canonical simulation of water at a NaCl(100) solid crystal surface, followed by the measure of the the heat of adsorption.
 
 ![Image of a NaCl-water interface](NaCl-H2O-GCMC/NaCl-H2O-GCMC.png)
+
+### For LAMMPS beginners
+
+Have a look at my [LAMMPS tutorials](https://lammpstutorials.github.io/) webpage.
+
+### Contact
+
+You can find [my contact information here](https://simongravelle.github.io/).
