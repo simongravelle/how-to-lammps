@@ -14,10 +14,8 @@ Grand canonical simulation of water at a NaCl(100) solid crystal surface, follow
 
 ![Image of a NaCl-water interface](NaCl-H2O-GCMC/NaCl-H2O-GCMC.png)
 
-### For LAMMPS beginners
-
-Have a look at my [LAMMPS tutorials](https://lammpstutorials.github.io/) webpage.
-
 ### Contact
 
-You can find [my contact information here](https://simongravelle.github.io/).
+You can find [my contact information here](https://simongravelle.github.io/), feel free to contact me if you have any question or request.
+
+If you are a LAMMPS beginner, have a look at my [LAMMPS tutorials](https://lammpstutorials.github.io/) webpage.
