@@ -102,3 +102,7 @@ important, they set the ratio between GCMC attempts and molecular dynamics (MD) 
 
 The system total energy and number of molecule are needed for the calculation of the 
 adsorption heat. 
+
+This `Python script`_ evaluate the heat of adsorption from the two generated files:
+
+.. _`Python script`: files/gcmc/measure_heat.ipynb
