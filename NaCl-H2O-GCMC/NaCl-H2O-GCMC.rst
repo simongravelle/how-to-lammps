@@ -23,12 +23,12 @@ required data and parameter files in this `folder`_.
      variable tem equal 297.15
      variable dis index 0.5
      variable tfac equal 5.0/3.0
-     variable mu equal -12.60
+     variable mu equal -12.275
 
 
 The value of the variable mu, which is the imposed chemical potential, can be calibrated
 by performing gcmc simulation in absence of solid (just vapor water). The calibration
-consists in performing simulation for varying value of mu, and measuring the
+consists in performing simulations for varying value of mu, and measuring the
 equilibrated pressure and water density.
 
 .. code-block:: python
@@ -42,6 +42,10 @@ equilibrated pressure and water density.
      kspace_style pppm/tip4p 1.0e-4
      pair_modify mix arithmetic tail yes
 
+
+Here a four-point water models is used (tip4p/epsilon). tip4p/epsilon is
+generally a good choice as it reproduces very accurately many properties
+of water under ambient conditions.
 
 .. code-block:: python
 
@@ -87,7 +91,7 @@ important, they set the ratio between GCMC attempts and molecular dynamics (MD) 
      variable del_att equal f_mygcmc[5]
      variable del_suc equal f_mygcmc[6]
      fix at3 all ave/time 100 10 1000 v_ins_att v_ins_suc v_del_att v_del_suc file gcmc.dat
-     run 50000
+     run 100000
      write_data gcmc.data
 
 The system total energy and number of molecule are needed for the calculation of the
