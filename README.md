@@ -4,7 +4,7 @@ This directory contains advanced LAMMPS input scripts with comments.
 
 ![Image of PEG molecule pulled in water](PEG-H2O/PEGinH2O.png)
 
-### [1) How-to stretch a polymer?](PEG-H2O/PEG-H2O.rst)
+### [1) How-to stretch a polymer in water?](PEG-H2O/PEG-H2O.rst)
 
 Equilibration of a single PEG molecule in a water box, followed by the forced stretching of the PEG molecule.
 
