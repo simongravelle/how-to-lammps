@@ -1,6 +1,6 @@
 # How-to LAMMPS
 
-This directory contains advanced LAMMPS input scripts with comments. 
+This directory contains advanced LAMMPS input scripts with comments, tips, and advices. 
 
 ![Image of PEG molecule pulled in water](PEG-H2O/PEGinH2O.png)
 
