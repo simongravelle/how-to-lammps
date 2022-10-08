@@ -20,4 +20,4 @@ Tutorial for calculating the NMR relaxation time of a box of water.
 
 You can find [my contact information here](https://simongravelle.github.io/), feel free to contact me if you have any question or request.
 
-If you are a LAMMPS beginner, have a look at my [LAMMPS tutorials](https://lammpstutorials.github.io/) webpage.
+If you are a LAMMPS beginner, have a look at [LAMMPS tutorials](https://lammpstutorials.github.io/).
