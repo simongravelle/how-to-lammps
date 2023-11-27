@@ -1,5 +1,7 @@
 # How-to LAMMPS
 
+WARNING: this repository is not maintained, refer to [LAMMPS tutorials](https://lammpstutorials.github.io/) for up to date LAMMPS instructions.
+
 This directory contains advanced LAMMPS input scripts with comments, tips, and advices. 
 
 ![Image of PEG molecule pulled in water](PEG-H2O/PEGinH2O.png)
